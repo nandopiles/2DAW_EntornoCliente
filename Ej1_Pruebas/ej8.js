@@ -1,7 +1,7 @@
 let number
 
 /**
- * Creates an Array with the Fibonacci's sequence since the position passed by parameter
+ ** Creates an Array with the Fibonacci's sequence since the position passed by parameter
  * @param {Number} position position where the sequence has to stop
  * @returns {Array} Fibonacci's sequence
  */
