@@ -7,17 +7,9 @@ do {
 console.log(mark);
 switch (parseInt(mark)) {
     case 0:
-        alert("INSUFICIENTE")
-        break;
     case 1:
-        alert("INSUFICIENTE")
-        break;
     case 2:
-        alert("INSUFICIENTE")
-        break;
     case 3:
-        alert("INSUFICIENTE")
-        break;
     case 4:
         alert("INSUFICIENTE")
         break;
@@ -28,14 +20,10 @@ switch (parseInt(mark)) {
         alert("BIEN")
         break;
     case 7:
-        alert("NOTABLE")
-        break;
     case 8:
         alert("NOTABLE")
         break;
     case 9:
-        alert("SOBRESALIENTE")
-        break;
     case 10:
         alert("SOBRESALIENTE")
         break;
