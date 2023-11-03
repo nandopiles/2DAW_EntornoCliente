@@ -3,7 +3,8 @@
  * @param {any} "form"
  * @returns {any}
  */
-document.getElementsByTagName("form")[0].addEventListener('submit', () => {
+document.getElementsByTagName("form")[0].addEventListener('submit', (event) => {
+    event.preventDefault()
     const insertObject = {
         name: document.getElementsByName("name")[0].value,
         surname1: document.getElementsByName("first_surname")[0].value,

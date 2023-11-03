@@ -94,10 +94,9 @@ const displayOnlyPhotoClicked = (elementPhoto) => {
                 : element.style.display = 'none'
         })
     } else {
-        console.log("aaaaa");
         document.getElementsByClassName("elementor-grid-1")[0].className = "elementor-grid-3"
         Array.from(document.getElementsByClassName("photo")).forEach((element) => element.style.display = 'block')
-        showAllPhotos(imagePaths)
+        showAllPhotos(imagePaths) 
     }
 }
 
