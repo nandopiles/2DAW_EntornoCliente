@@ -3,7 +3,7 @@ const urlAPI = 'https://api.github.com/search/users?q=JavaScript';
 
 
 /**
- * get all the github users which the have in their names "JavaScript" from the API
+ * get all the github users from the API who have in their names "JavaScript"
  * @returns {Array}
  */
 const getObjectFromAPI = async () => {

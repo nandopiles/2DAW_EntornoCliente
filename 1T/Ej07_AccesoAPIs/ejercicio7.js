@@ -1,15 +1,15 @@
 const urlAPI = 'https://api.github.com/search/users?';
-const nameToSearch = "nandopiles";
 
 
 
 /**
- * get all the github users from the API who have in their names the chosen name
- * @returns {Array}
+ * get all the github users from the API which they have in their names the username passed by parameter
+ * @param {any} username
+ * @returns {any}
  */
-const getObjectFromAPI = async () => {
+const getObjectFromAPI = async (username) => {
     try {
-        const response = await fetch(urlAPI + `q=${nameToSearch}`);
+        const response = await fetch(urlAPI + `q=${username}`);
         if (response.ok) {
             const jsonResponse = await response.json();
 
@@ -50,7 +50,13 @@ const displayImg = (urlImg, username, idUser, event) => {
 
 
 
-document.getElementsByName('profiles')[2].addEventListener('click', async (event) => {
-    let objectsAPI = await getObjectFromAPI();
-    displayImg(objectsAPI.items[0].avatar_url, objectsAPI.items[0].login, objectsAPI.items[0].id, event)
+document.getElementsByTagName('form')[1].addEventListener('submit', async (event) => {
+    event.preventDefault();
+    let nameToSearch = document.getElementsByName('search_term')[0].value;
+    console.log(nameToSearch);
+    let objectsAPI = await getObjectFromAPI(nameToSearch);
+    console.log(objectsAPI);
+    let positionToDisplay = parseInt(document.getElementsByName('position')[1].value);
+
+    displayImg(objectsAPI.items[positionToDisplay].avatar_url, objectsAPI.items[positionToDisplay].login, objectsAPI.items[positionToDisplay].id, event)
 });

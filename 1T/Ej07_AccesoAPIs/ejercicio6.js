@@ -1,5 +1,5 @@
 const urlAPI = 'https://api.github.com/search/users?';
-const nameToSearch = "nandopiles";
+const nameToSearch = "David";
 
 
 
@@ -50,7 +50,10 @@ const displayImg = (urlImg, username, idUser, event) => {
 
 
 
-document.getElementsByName('profiles')[2].addEventListener('click', async (event) => {
+document.getElementById('form').addEventListener('submit', async (event) => {
+    event.preventDefault();
     let objectsAPI = await getObjectFromAPI();
-    displayImg(objectsAPI.items[0].avatar_url, objectsAPI.items[0].login, objectsAPI.items[0].id, event)
+    let positionToDisplay = parseInt(document.getElementsByName('position')[0].value);
+
+    displayImg(objectsAPI.items[positionToDisplay].avatar_url, objectsAPI.items[positionToDisplay].login, objectsAPI.items[positionToDisplay].id, event)
 });
