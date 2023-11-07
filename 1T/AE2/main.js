@@ -77,6 +77,30 @@ const enlargeImgSelected = (element, position) => {
 };
 
 /**
+ * Adds the character clicked into the favorite list.
+ * @param {Number} id
+ * @param {Element} nameElement
+ * @param {String} backgroundImgValue
+ * @param {String} genderValue
+ * @param {String} speciesValue
+ * @param {String} nameValue
+ * @param {String} statusValue
+ * @returns {any}
+ */
+const moveToFavorites = (id, nameElement, backgroundImgValue, genderValue, speciesValue, nameValue, statusValue) => {
+    nameElement.addEventListener('click', () => {
+        const insertCharacter = {
+            backgroundImage: backgroundImgValue,
+            gender: genderValue,
+            species: speciesValue,
+            name: nameValue,
+            status: statusValue
+        };
+        window.localStorage.setItem(id, JSON.stringify(insertCharacter));
+    });
+};
+
+/**
  * Creates a card of the character selected with all his information.
  * @param {Number} position Position of the character in the list.
  * @param {String} backgroundImg
@@ -130,6 +154,7 @@ const createImgsCards = (position, backgroundImg, gender, species, name, status)
     item4Element.textContent = status;
 
     enlargeImgSelected(triggerElement, position);
+    moveToFavorites(position, item3Element, backgroundImg, gender, species, name, status);
 };
 
 /**
