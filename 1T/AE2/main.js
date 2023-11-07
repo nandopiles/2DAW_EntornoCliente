@@ -3,17 +3,32 @@ const gridContainer = document.getElementsByClassName('grid-container')[0];
 const initialDataNumImgs = Array.from({ length: 3 });
 const pageDataNumImgs = Array.from({ length: 20 });
 let apiResponseData = null;
+let maxPages = null;
+let currentNumberPage = 1;
 
 
 
 /**
+ * Removes all the elements which have the class card implemented.
+ * @returns {any}
+ */
+const deleteAllCards = () => {
+    const cards = document.querySelectorAll('.card');
+
+    cards.forEach(card => card.remove());
+};
+
+/**
  * Gets all the characters from the API.
+ * @returns {any}
  */
 const fetchDataFromAPI = async () => {
     try {
-        const response = await fetch(urlAPI);
-        if (response.ok)
+        const response = await fetch(urlAPI + `?page=${currentNumberPage}`);
+        if (response.ok) {
             apiResponseData = await response.json();
+            maxPages = apiResponseData.info.pages;
+        }
     }
     catch (error) {
         console.log(error);
@@ -27,9 +42,8 @@ const fetchDataFromAPI = async () => {
 const openModal = () => {
     const modalElement = document.querySelector(".modal");
 
-    if (modalElement) {
+    if (modalElement)
         modalElement.classList.add("show-modal");
-    }
 };
 
 /**
@@ -40,16 +54,13 @@ const closeModal = () => {
     const closeButton = document.querySelector(".close-button");
     const modalElement = document.querySelector(".modal.show-modal");
 
-    if (closeButton && modalElement) {
-        closeButton.addEventListener("click", () => {
-            modalElement.classList.remove("show-modal");
-        });
-    }
+    if (closeButton && modalElement)
+        closeButton.addEventListener("click", () => modalElement.classList.remove("show-modal"));
 };
 
 /**
  * Confs the modal window with the info of the character selected.
- * @param {any} element Which character is.
+ * @param {Element} element Which character is.
  * @param {any} position Position of the character in the list.
  * @returns {any}
  */
@@ -62,20 +73,20 @@ const enlargeImgSelected = (element, position) => {
         document.getElementsByClassName('modal-content')[0].style.backgroundSize = 'cover';
         document.getElementsByClassName('modal-content')[0].style.backgroundPosition = 'center';
         document.getElementsByClassName('modal-content')[0].style.backgroundRepeat = 'no-repeat';
-    })
+    });
 };
 
 /**
  * Creates a card of the character selected with all his information.
- * @param {any} position Position of the character in the list.
- * @param {any} backgroundImg
- * @param {any} gender
- * @param {any} species
- * @param {any} name
- * @param {any} status
+ * @param {Number} position Position of the character in the list.
+ * @param {String} backgroundImg
+ * @param {String} gender
+ * @param {String} species
+ * @param {String} name
+ * @param {String} status
  * @returns {any}
  */
-const displayImgsCards = (position, backgroundImg, gender, species, name, status) => {
+const createImgsCards = (position, backgroundImg, gender, species, name, status) => {
     const cardElement = document.createElement('div');
     const thumbnailElement = document.createElement('div');
     const item0Element = document.createElement('div');
@@ -127,7 +138,8 @@ const displayImgsCards = (position, backgroundImg, gender, species, name, status
  * @returns {any}
  */
 const showImgs = async (position) => {
-    displayImgsCards(position, apiResponseData.results[position].image, apiResponseData.results[position].gender, apiResponseData.results[position].species, apiResponseData.results[position].name, apiResponseData.results[position].status);
+    if (apiResponseData.results[position] !== undefined)
+        createImgsCards(position, apiResponseData.results[position].image, apiResponseData.results[position].gender, apiResponseData.results[position].species, apiResponseData.results[position].name, apiResponseData.results[position].status);
 };
 
 /**
@@ -135,15 +147,98 @@ const showImgs = async (position) => {
  * @param {Array} arrayData number of characters to display.
  * @returns {any}
  */
-const initializeInitialData = async (arrayData) => {
+const displayData = async (arrayData) => {
     await fetchDataFromAPI();
+    document.getElementById('number-page').innerHTML = currentNumberPage;
     arrayData.forEach((_, index) => showImgs(index));
 };
 
+/**
+ * Creates a "nextBtn" in the container passed by parameter.
+ * @param {Number} containerId
+ * @returns {any}
+ */
+const createNextBtn = (containerId) => { document.getElementById(containerId).innerHTML = `<button id="next-btn">SIGUIENTE</button>` };
+
+/**
+ * Creates a "previousBtn" in the container passed by parameter.
+ * @param {Number} containerId
+ * @returns {any}
+ */
+const createPreviousBtn = (containerId) => { document.getElementById(containerId).innerHTML = `<button id="previous-btn">ANTERIOR</button>` };
+
+/**
+ *  Creates a "ShowMoreBtn" in the container passed by parameter.
+ * @param {Number} containerId
+ * @returns {any}
+ */
+const createShowMoreBtn = (containerId) => { document.getElementById(containerId).innerHTML = `<button id="show-more">MOSTRAR MÁS</button>` };
+
+/**
+ * Creates the both buttons.
+ * The previous one and the next one.
+ * @param {Number} containerId
+ * @returns {any}
+ */
+const createBothBtn = (containerId) => { document.getElementById(containerId).innerHTML = `<button id="previous-btn">ANTERIOR</button><button id="next-btn">SIGUIENTE</button>` };
+
+/**
+ * Changes the current page to the next one.
+ * @returns {any}
+ */
+const changeToNextPage = () => {
+    document.getElementById('next-btn').addEventListener('click', () => {
+        currentNumberPage++;
+        document.getElementById('number-page').innerHTML = currentNumberPage;
+        deleteAllCards();
+        displayData(initialDataNumImgs);
+        createShowMoreBtn('render-more');
+        document.getElementById('show-more').addEventListener('click', listenerFunctionForShowMoreBtn)
+    });
+};
+
+/**
+ * Changes the current page to the previous one.
+ * @returns {any}
+ */
+const changeToPreviousPage = () => {
+    document.getElementById('previous-btn').addEventListener('click', () => {
+        currentNumberPage--;
+        document.getElementById('number-page').innerHTML = currentNumberPage;
+        deleteAllCards();
+        displayData(initialDataNumImgs);
+        createShowMoreBtn('render-more');
+        document.getElementById('show-more').addEventListener('click', listenerFunctionForShowMoreBtn)
+    });
+};
+
+/**
+ *! Listener function for the show-more btn.
+ * 
+ * Shows all the characters of the page.
+ * @returns {any}
+ */
+const listenerFunctionForShowMoreBtn = async () => {
+    deleteAllCards();
+    displayData(pageDataNumImgs);
+    if (currentNumberPage === 1) {
+        createNextBtn('render-more');
+        changeToNextPage();
+    } else if (currentNumberPage === maxPages) {
+        //the previous button
+        createPreviousBtn('render-more')
+        changeToPreviousPage();
+    } else {
+        createBothBtn('render-more');
+        changeToPreviousPage();
+        changeToNextPage();
+    }
+}
 
 
-initializeInitialData(initialDataNumImgs);
-document.getElementsByClassName('card')[0].remove();
-document.getElementsByTagName('button')[0].addEventListener('click', async () => {
 
-})
+displayData(initialDataNumImgs);
+deleteAllCards();
+document.getElementsByTagName('button')[0].setAttribute('id', 'show-more');
+
+document.getElementById('show-more').addEventListener('click', listenerFunctionForShowMoreBtn)
