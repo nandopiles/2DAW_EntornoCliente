@@ -100,6 +100,10 @@ const moveToFavorites = (id, nameElement, backgroundImgValue, genderValue, speci
     });
 };
 
+const displayFavorites = () => {
+
+};
+
 /**
  * Creates a card of the character selected with all his information.
  * @param {Number} position Position of the character in the list.
@@ -261,7 +265,11 @@ const listenerFunctionForShowMoreBtn = async () => {
 }
 
 
-
+document.getElementsByTagName('h1')[0].addEventListener('click', () => {
+    Object.values(localStorage).forEach(value => {
+        console.log(`Name: ${JSON.parse(value).name}`);
+    });
+});
 displayData(initialDataNumImgs);
 deleteAllCards();
 document.getElementsByTagName('button')[0].setAttribute('id', 'show-more');
