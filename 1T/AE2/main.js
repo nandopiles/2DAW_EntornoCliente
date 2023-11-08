@@ -87,14 +87,15 @@ const enlargeImgSelected = (element, position) => {
  * @param {String} statusValue
  * @returns {any}
  */
-const moveToFavorites = (id, nameElement, backgroundImgValue, genderValue, speciesValue, nameValue, statusValue) => {
+const moveToFavorites = (id, positionInTheListValue, nameElement, backgroundImgValue, genderValue, speciesValue, nameValue, statusValue) => {
     nameElement.addEventListener('click', () => {
         const insertCharacter = {
             backgroundImage: backgroundImgValue,
             gender: genderValue,
             species: speciesValue,
             name: nameValue,
-            status: statusValue
+            status: statusValue,
+            positionInTheList: positionInTheListValue
         };
         window.localStorage.setItem(id, JSON.stringify(insertCharacter));
     });
@@ -102,7 +103,7 @@ const moveToFavorites = (id, nameElement, backgroundImgValue, genderValue, speci
 
 /**
  * Creates a card of the character selected with all his information.
- * @param {Number} position Position of the character in the list.
+ * @param {Number} positionInTheList Position of the character in the list.
  * @param {String} backgroundImg
  * @param {String} gender
  * @param {String} species
@@ -110,7 +111,7 @@ const moveToFavorites = (id, nameElement, backgroundImgValue, genderValue, speci
  * @param {String} status
  * @returns {any}
  */
-const createImgsCards = (position, backgroundImg, gender, species, name, status) => {
+const createImgsCards = (positionInTheList, id, backgroundImg, gender, species, name, status) => {
     const cardElement = document.createElement('div');
     const thumbnailElement = document.createElement('div');
     const item0Element = document.createElement('div');
@@ -153,8 +154,8 @@ const createImgsCards = (position, backgroundImg, gender, species, name, status)
     item3Element.textContent = name;
     item4Element.textContent = status;
 
-    enlargeImgSelected(triggerElement, position);
-    moveToFavorites(position, item3Element, backgroundImg, gender, species, name, status);
+    enlargeImgSelected(triggerElement, positionInTheList);
+    moveToFavorites(id, positionInTheList, item3Element, backgroundImg, gender, species, name, status);
 };
 
 /**
@@ -170,7 +171,7 @@ const createBackToMainPage = (containerId) => { document.getElementById(containe
  */
 const showImgs = async (position) => {
     if (apiResponseData.results[position] !== undefined)
-        createImgsCards(position, apiResponseData.results[position].image, apiResponseData.results[position].gender, apiResponseData.results[position].species, apiResponseData.results[position].name, apiResponseData.results[position].status);
+        createImgsCards(position, apiResponseData.results[position].id, apiResponseData.results[position].image, apiResponseData.results[position].gender, apiResponseData.results[position].species, apiResponseData.results[position].name, apiResponseData.results[position].status);
 };
 
 /**
@@ -279,7 +280,7 @@ const autocompleteNameAnimation = (elementHTML, position) => {
 const initializeAnimationChangeLetters = (elementsHTML) => {
     console.log('a');
     // elementsHTML.forEach((element, index) => autocompleteNameAnimation(element, index));
-    elementsHTML.forEach(element => console.log(element));
+    // elementsHTML.forEach(element => console.log(element));
 };
 
 /**
@@ -321,10 +322,10 @@ const displayFavorites = () => {
         displayData(initialDataNumImgs);
         createShowMoreBtn('render-more');
         document.getElementById('show-more').addEventListener('click', listenerFunctionForShowMoreBtn)
-    })
+    });
 
     Object.keys(localStorage).forEach(key => {
-        createImgsCards(key, JSON.parse(localStorage.getItem(key)).backgroundImage, JSON.parse(localStorage.getItem(key)).gender,
+        createImgsCards(JSON.parse(localStorage.getItem(key)).positionInTheList, key, JSON.parse(localStorage.getItem(key)).backgroundImage, JSON.parse(localStorage.getItem(key)).gender,
             JSON.parse(localStorage.getItem(key)).species, JSON.parse(localStorage.getItem(key)).name);
     });
 };
