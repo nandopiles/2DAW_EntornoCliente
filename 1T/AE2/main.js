@@ -100,10 +100,6 @@ const moveToFavorites = (id, nameElement, backgroundImgValue, genderValue, speci
     });
 };
 
-const displayFavorites = () => {
-
-};
-
 /**
  * Creates a card of the character selected with all his information.
  * @param {Number} position Position of the character in the list.
@@ -159,6 +155,21 @@ const createImgsCards = (position, backgroundImg, gender, species, name, status)
 
     enlargeImgSelected(triggerElement, position);
     moveToFavorites(position, item3Element, backgroundImg, gender, species, name, status);
+};
+
+/**
+ * Displays the favorite list of characters.
+ * @returns {any}
+ */
+const displayFavorites = () => {
+    deleteAllCards();
+    document.getElementById('render-more').innerHTML = '';
+    document.getElementsByTagName('p')[0].innerHTML = '';
+
+    Object.keys(localStorage).forEach(key => {
+        createImgsCards(key, JSON.parse(localStorage.getItem(key)).backgroundImage, JSON.parse(localStorage.getItem(key)).gender,
+            JSON.parse(localStorage.getItem(key)).species, JSON.parse(localStorage.getItem(key)).name);
+    });
 };
 
 /**
@@ -254,7 +265,6 @@ const listenerFunctionForShowMoreBtn = async () => {
         createNextBtn('render-more');
         changeToNextPage();
     } else if (currentNumberPage === maxPages) {
-        //the previous button
         createPreviousBtn('render-more')
         changeToPreviousPage();
     } else {
@@ -265,11 +275,7 @@ const listenerFunctionForShowMoreBtn = async () => {
 }
 
 
-document.getElementsByTagName('h1')[0].addEventListener('click', () => {
-    Object.values(localStorage).forEach(value => {
-        console.log(`Name: ${JSON.parse(value).name}`);
-    });
-});
+document.getElementsByTagName('h1')[0].addEventListener('click', () => displayFavorites());
 displayData(initialDataNumImgs);
 deleteAllCards();
 document.getElementsByTagName('button')[0].setAttribute('id', 'show-more');
