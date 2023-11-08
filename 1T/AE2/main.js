@@ -158,19 +158,10 @@ const createImgsCards = (position, backgroundImg, gender, species, name, status)
 };
 
 /**
- * Displays the favorite list of characters.
+ * Creates a "BackToMainPageBtn" in the container passed by parameter.
  * @returns {any}
  */
-const displayFavorites = () => {
-    deleteAllCards();
-    document.getElementById('render-more').innerHTML = '';
-    document.getElementsByTagName('p')[0].innerHTML = '';
-
-    Object.keys(localStorage).forEach(key => {
-        createImgsCards(key, JSON.parse(localStorage.getItem(key)).backgroundImage, JSON.parse(localStorage.getItem(key)).gender,
-            JSON.parse(localStorage.getItem(key)).species, JSON.parse(localStorage.getItem(key)).name);
-    });
-};
+const createBackToMainPage = (containerId) => { document.getElementById(containerId).innerHTML = '<button id="backMainPage-btn">VOLVER</button>'; };
 
 /**
  * Shows all the info about the character of the position given by parameter.
@@ -198,21 +189,21 @@ const displayData = async (arrayData) => {
  * @param {Number} containerId
  * @returns {any}
  */
-const createNextBtn = (containerId) => { document.getElementById(containerId).innerHTML = `<button id="next-btn">SIGUIENTE</button>` };
+const createNextBtn = (containerId) => { document.getElementById(containerId).innerHTML = `<button id="next-btn">SIGUIENTE</button>`; };
 
 /**
  * Creates a "previousBtn" in the container passed by parameter.
  * @param {Number} containerId
  * @returns {any}
  */
-const createPreviousBtn = (containerId) => { document.getElementById(containerId).innerHTML = `<button id="previous-btn">ANTERIOR</button>` };
+const createPreviousBtn = (containerId) => { document.getElementById(containerId).innerHTML = `<button id="previous-btn">ANTERIOR</button>`; };
 
 /**
  *  Creates a "ShowMoreBtn" in the container passed by parameter.
  * @param {Number} containerId
  * @returns {any}
  */
-const createShowMoreBtn = (containerId) => { document.getElementById(containerId).innerHTML = `<button id="show-more">MOSTRAR MÁS</button>` };
+const createShowMoreBtn = (containerId) => { document.getElementById(containerId).innerHTML = `<button id="show-more">MOSTRAR MÁS</button>`; };
 
 /**
  * Creates the both buttons.
@@ -220,7 +211,51 @@ const createShowMoreBtn = (containerId) => { document.getElementById(containerId
  * @param {Number} containerId
  * @returns {any}
  */
-const createBothBtn = (containerId) => { document.getElementById(containerId).innerHTML = `<button id="previous-btn">ANTERIOR</button><button id="next-btn">SIGUIENTE</button>` };
+const createBothBtn = (containerId) => { document.getElementById(containerId).innerHTML = `<button id="previous-btn">ANTERIOR</button><button id="next-btn">SIGUIENTE</button>`; };
+
+/**
+ *! Listener function for the show-more btn.
+ * 
+ * Shows all the characters of the page.
+ * @returns {any}
+ */
+const listenerFunctionForShowMoreBtn = async () => {
+    deleteAllCards();
+    displayData(pageDataNumImgs);
+    if (currentNumberPage === 1) {
+        createNextBtn('render-more');
+        changeToNextPage();
+    } else if (currentNumberPage === maxPages) {
+        createPreviousBtn('render-more')
+        changeToPreviousPage();
+    } else {
+        createBothBtn('render-more');
+        changeToPreviousPage();
+        changeToNextPage();
+    }
+}
+
+/**
+ * Displays the favorite list of characters.
+ * @returns {any}
+ */
+const displayFavorites = () => {
+    deleteAllCards();
+    document.getElementById("number-page").innerHTML = 'Favoritos';
+    createBackToMainPage('render-more');
+
+    document.getElementById('backMainPage-btn').addEventListener('click', () => {
+        deleteAllCards();
+        displayData(initialDataNumImgs);
+        createShowMoreBtn('render-more');
+        document.getElementById('show-more').addEventListener('click', listenerFunctionForShowMoreBtn)
+    })
+
+    Object.keys(localStorage).forEach(key => {
+        createImgsCards(key, JSON.parse(localStorage.getItem(key)).backgroundImage, JSON.parse(localStorage.getItem(key)).gender,
+            JSON.parse(localStorage.getItem(key)).species, JSON.parse(localStorage.getItem(key)).name);
+    });
+};
 
 /**
  * Changes the current page to the next one.
@@ -252,32 +287,11 @@ const changeToPreviousPage = () => {
     });
 };
 
-/**
- *! Listener function for the show-more btn.
- * 
- * Shows all the characters of the page.
- * @returns {any}
- */
-const listenerFunctionForShowMoreBtn = async () => {
-    deleteAllCards();
-    displayData(pageDataNumImgs);
-    if (currentNumberPage === 1) {
-        createNextBtn('render-more');
-        changeToNextPage();
-    } else if (currentNumberPage === maxPages) {
-        createPreviousBtn('render-more')
-        changeToPreviousPage();
-    } else {
-        createBothBtn('render-more');
-        changeToPreviousPage();
-        changeToNextPage();
-    }
-}
 
 
-document.getElementsByTagName('h1')[0].addEventListener('click', () => displayFavorites());
-displayData(initialDataNumImgs);
 deleteAllCards();
+displayData(initialDataNumImgs);
+document.getElementsByTagName('h1')[0].addEventListener('click', () => displayFavorites());
 document.getElementsByTagName('button')[0].setAttribute('id', 'show-more');
 
 document.getElementById('show-more').addEventListener('click', listenerFunctionForShowMoreBtn)
