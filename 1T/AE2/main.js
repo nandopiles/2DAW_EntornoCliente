@@ -214,7 +214,76 @@ const createShowMoreBtn = (containerId) => { document.getElementById(containerId
 const createBothBtn = (containerId) => { document.getElementById(containerId).innerHTML = `<button id="previous-btn">ANTERIOR</button><button id="next-btn">SIGUIENTE</button>`; };
 
 /**
- *! Listener function for the show-more btn.
+ * Generates a random letter from the alphabet.
+ * @returns {String} a random letter from the alphabet in Uppercase.
+ */
+const generateRandomLetter = () => {
+    const letters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+
+    return letters[Math.floor(Math.random() * letters.length)];
+};
+
+/**
+ * Does an animation that change the letters in a random way until the name is correctly formed.
+ * 
+ * It's a recursive function, that's the reason why you have to passed 0 by parameter to start in that position and then it will change calling itself.
+ * @param {Element} elementHTML
+ * @param {Number} positionLetter always pass by parameter [0], to say that you want to start by the letter in the position 0
+ * @param {Number} position of the character in the list.
+ * @returns {any}
+ */
+// const autocompleteNameAnimation = (elementHTML, positionLetter, position) => {
+//     if (positionLetter < apiResponseData.results[position].name.length) {
+//         elementHTML.textContent += generateRandomLetter();
+
+//         if (elementHTML.textContent[positionLetter] === apiResponseData.results[position].name[positionLetter])
+//             autocompleteNameAnimation(positionLetter + 1);
+//         else {
+//             elementHTML.textContent = elementHTML.textContent.slice(0, -1);
+//             autocompleteNameAnimation(positionLetter);
+//         }
+//     }
+// };
+
+/**
+ * Does an animation that change the letters in a random way until the name is correctly formed.
+ * 
+ * It's a recursive function, that's the reason why you have to passed 0 by parameter to start in that position and then it will change calling itself.
+ * @param {Element} elementHTML
+ * @param {Number} positionLetter always pass by parameter [0], to say that you want to start by the letter in the position 0
+ * @param {Number} position of the character in the list.
+ * @returns {any}
+ */
+const autocompleteNameAnimation = (elementHTML, position) => {
+    console.log('b');
+    const name = apiResponseData.results[position].name;
+    let index = 0;
+
+    const interval = setInterval(() => {
+        if (index < name.length) {
+            elementHTML.textContent += generateRandomLetter();
+
+            // Verificar si la letra coincide con la letra del nombre en la posición actual
+            if (elementHTML.textContent[index] === name[index])
+                index++;
+        } else
+            clearInterval(interval);
+    }, 100);
+};
+
+/**
+ * Description
+ * @param {Array} elementsHTML
+ * @returns {any}
+ */
+const initializeAnimationChangeLetters = (elementsHTML) => {
+    console.log('a');
+    // elementsHTML.forEach((element, index) => autocompleteNameAnimation(element, index));
+    elementsHTML.forEach(element => console.log(element));
+};
+
+/**
+ * Listener function for the show-more btn.
  * 
  * Shows all the characters of the page.
  * @returns {any}
@@ -225,15 +294,18 @@ const listenerFunctionForShowMoreBtn = async () => {
     if (currentNumberPage === 1) {
         createNextBtn('render-more');
         changeToNextPage();
+        initializeAnimationChangeLetters(document.getElementsByClassName('item-3'));
     } else if (currentNumberPage === maxPages) {
         createPreviousBtn('render-more')
         changeToPreviousPage();
+        initializeAnimationChangeLetters(document.getElementsByClassName('item-3'));
     } else {
         createBothBtn('render-more');
         changeToPreviousPage();
         changeToNextPage();
+        initializeAnimationChangeLetters(document.getElementsByClassName('item-3'));
     }
-}
+};
 
 /**
  * Displays the favorite list of characters.
