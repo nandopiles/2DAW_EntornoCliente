@@ -77,7 +77,7 @@ const enlargeImgSelected = (element, position) => {
 };
 
 /**
- * Adds the character clicked into the favorite list.
+ *? Adds the character clicked into the favorite list.
  * @param {Number} id
  * @param {Element} nameElement
  * @param {String} backgroundImgValue
@@ -99,6 +99,42 @@ const moveToFavorites = (id, positionInTheListValue, nameElement, backgroundImgV
         };
         window.localStorage.setItem(id, JSON.stringify(insertCharacter));
     });
+};
+
+/**
+ *? Generates a random letter from the alphabet.
+ * @returns {String} a random letter from the alphabet in Uppercase.
+ */
+const generateRandomLetter = () => {
+    const letters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+
+    return letters[Math.floor(Math.random() * letters.length)];
+};
+
+/**
+ * Creates a matrix animation completing the name of the character.
+ * @param {Element} elementHTML
+ * @returns {void}
+ */
+const autocompleteNameAnimation = (elementHTML) => {
+    let name = elementHTML.textContent;
+    let index = 0;
+    let count = 0;
+
+    elementHTML.textContent = "";
+    const interval = setInterval(() => {
+        if (count < 9) {
+            elementHTML.textContent = name.substring(0, index) + generateRandomLetter();
+            count++;
+        } else {
+            elementHTML.textContent = name.substring(0, index) + name[index].toUpperCase();
+            count = 0;
+            index++;
+
+            if (index === name.length)
+                clearInterval(interval);
+        }
+    }, 15);
 };
 
 /**
@@ -156,6 +192,7 @@ const createImgsCards = (positionInTheList, id, backgroundImg, gender, species, 
 
     enlargeImgSelected(triggerElement, positionInTheList);
     moveToFavorites(id, positionInTheList, item3Element, backgroundImg, gender, species, name, status);
+    autocompleteNameAnimation(item3Element);
 };
 
 /**
@@ -215,96 +252,24 @@ const createShowMoreBtn = (containerId) => { document.getElementById(containerId
 const createBothBtn = (containerId) => { document.getElementById(containerId).innerHTML = `<button id="previous-btn">ANTERIOR</button><button id="next-btn">SIGUIENTE</button>`; };
 
 /**
- * Generates a random letter from the alphabet.
- * @returns {String} a random letter from the alphabet in Uppercase.
- */
-const generateRandomLetter = () => {
-    const letters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
-
-    return letters[Math.floor(Math.random() * letters.length)];
-};
-
-/**
- * Does an animation that change the letters in a random way until the name is correctly formed.
- * 
- * It's a recursive function, that's the reason why you have to passed 0 by parameter to start in that position and then it will change calling itself.
- * @param {Element} elementHTML
- * @param {Number} positionLetter always pass by parameter [0], to say that you want to start by the letter in the position 0
- * @param {Number} position of the character in the list.
- * @returns {any}
- */
-// const autocompleteNameAnimation = (elementHTML, positionLetter, position) => {
-//     if (positionLetter < apiResponseData.results[position].name.length) {
-//         elementHTML.textContent += generateRandomLetter();
-
-//         if (elementHTML.textContent[positionLetter] === apiResponseData.results[position].name[positionLetter])
-//             autocompleteNameAnimation(positionLetter + 1);
-//         else {
-//             elementHTML.textContent = elementHTML.textContent.slice(0, -1);
-//             autocompleteNameAnimation(positionLetter);
-//         }
-//     }
-// };
-
-/**
- * Does an animation that change the letters in a random way until the name is correctly formed.
- * 
- * It's a recursive function, that's the reason why you have to passed 0 by parameter to start in that position and then it will change calling itself.
- * @param {Element} elementHTML
- * @param {Number} positionLetter always pass by parameter [0], to say that you want to start by the letter in the position 0
- * @param {Number} position of the character in the list.
- * @returns {any}
- */
-const autocompleteNameAnimation = (elementHTML, position) => {
-    console.log('b');
-    const name = apiResponseData.results[position].name;
-    let index = 0;
-
-    const interval = setInterval(() => {
-        if (index < name.length) {
-            elementHTML.textContent += generateRandomLetter();
-
-            // Verificar si la letra coincide con la letra del nombre en la posición actual
-            if (elementHTML.textContent[index] === name[index])
-                index++;
-        } else
-            clearInterval(interval);
-    }, 100);
-};
-
-/**
- * Description
- * @param {Array} elementsHTML
- * @returns {any}
- */
-const initializeAnimationChangeLetters = (elementsHTML) => {
-    console.log('a');
-    // elementsHTML.forEach((element, index) => autocompleteNameAnimation(element, index));
-    // elementsHTML.forEach(element => console.log(element));
-};
-
-/**
  * Listener function for the show-more btn.
  * 
  * Shows all the characters of the page.
  * @returns {any}
  */
-const listenerFunctionForShowMoreBtn = async () => {
+const listenerFunctionForShowMoreBtn = () => {
     deleteAllCards();
     displayData(pageDataNumImgs);
     if (currentNumberPage === 1) {
         createNextBtn('render-more');
         changeToNextPage();
-        initializeAnimationChangeLetters(document.getElementsByClassName('item-3'));
     } else if (currentNumberPage === maxPages) {
         createPreviousBtn('render-more')
         changeToPreviousPage();
-        initializeAnimationChangeLetters(document.getElementsByClassName('item-3'));
     } else {
         createBothBtn('render-more');
         changeToPreviousPage();
         changeToNextPage();
-        initializeAnimationChangeLetters(document.getElementsByClassName('item-3'));
     }
 };
 
@@ -325,8 +290,10 @@ const displayFavorites = () => {
     });
 
     Object.keys(localStorage).forEach(key => {
-        createImgsCards(JSON.parse(localStorage.getItem(key)).positionInTheList, key, JSON.parse(localStorage.getItem(key)).backgroundImage, JSON.parse(localStorage.getItem(key)).gender,
-            JSON.parse(localStorage.getItem(key)).species, JSON.parse(localStorage.getItem(key)).name);
+        const favoriteObject = JSON.parse(localStorage.getItem(key));
+
+        createImgsCards(favoriteObject.positionInTheList, key, favoriteObject.backgroundImage, favoriteObject.gender,
+            favoriteObject.species, favoriteObject.name, favoriteObject.status);
     });
 };
 
@@ -364,7 +331,7 @@ const changeToPreviousPage = () => {
 
 deleteAllCards();
 displayData(initialDataNumImgs);
-document.getElementsByTagName('h1')[0].addEventListener('click', () => displayFavorites());
+document.getElementsByTagName('h1')[0].addEventListener('click', displayFavorites);
 document.getElementsByTagName('button')[0].setAttribute('id', 'show-more');
 
 document.getElementById('show-more').addEventListener('click', listenerFunctionForShowMoreBtn)
