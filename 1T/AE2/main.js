@@ -1,4 +1,4 @@
-const urlAPI = 'https://rickandmortyapi.com/api/character';
+const urlAPI = 'https://rickandmortyapi.com/api/character/';
 const gridContainer = document.getElementsByClassName('grid-container')[0];
 const initialDataNumImgs = Array.from({ length: 3 });
 const pageDataNumImgs = Array.from({ length: 20 });
@@ -10,7 +10,7 @@ let currentNumberPage = 1;
 
 /**
  * Removes all the elements which have the class card implemented.
- * @returns {any}
+ * @returns {void}
  */
 const deleteAllCards = () => {
     const cards = document.querySelectorAll('.card');
@@ -20,9 +20,9 @@ const deleteAllCards = () => {
 
 /**
  * Gets all the characters from the API.
- * @returns {any}
+ * @returns {void}
  */
-const fetchDataFromAPI = async () => {
+const loadAllCharacters = async () => {
     try {
         const response = await fetch(urlAPI + `?page=${currentNumberPage}`);
         if (response.ok) {
@@ -36,8 +36,25 @@ const fetchDataFromAPI = async () => {
 };
 
 /**
+ * Gets a specific character depending on the id passed by parameter from the API.
+ * @returns {Promise<any>}
+ */
+const loadCharacterById = async (id) => {
+    try {
+        const response = await fetch(urlAPI + `/${id}`);
+        if (response.ok) {
+            const specificCharacter = await response.json();
+            return specificCharacter;
+        }
+    }
+    catch (error) {
+        console.log(error);
+    }
+};
+
+/**
  * Opens the modal window.
- * @returns {any}
+ * @returns {void}
 */
 const openModal = () => {
     const modalElement = document.querySelector(".modal");
@@ -48,7 +65,7 @@ const openModal = () => {
 
 /**
  * Closes the modal window.
- * @returns {any}
+ * @returns {void}
  */
 const closeModal = () => {
     const closeButton = document.querySelector(".close-button");
@@ -61,15 +78,16 @@ const closeModal = () => {
 /**
  * Confs the modal window with the info of the character selected.
  * @param {Element} element Which character is.
- * @param {any} position Position of the character in the list.
- * @returns {any}
+ * @param {Number} position Position of the character in the list.
+ * @returns {void}
  */
-const enlargeImgSelected = (element, position) => {
-    element.addEventListener('click', () => {
+const enlargeImgSelected = (element, id) => {
+    element.addEventListener('click', async () => {
         openModal();
         closeModal();
-        document.getElementsByTagName('h1')[1].textContent = apiResponseData.results[position].name;
-        document.getElementsByClassName('modal-content')[0].style.backgroundImage = `url("${apiResponseData.results[position].image}")`;
+        const character = await loadCharacterById(id);
+        document.getElementsByTagName('h1')[1].textContent = character.name;
+        document.getElementsByClassName('modal-content')[0].style.backgroundImage = `url("${character.image}")`;
         document.getElementsByClassName('modal-content')[0].style.backgroundSize = 'cover';
         document.getElementsByClassName('modal-content')[0].style.backgroundPosition = 'center';
         document.getElementsByClassName('modal-content')[0].style.backgroundRepeat = 'no-repeat';
@@ -85,7 +103,7 @@ const enlargeImgSelected = (element, position) => {
  * @param {String} speciesValue
  * @param {String} nameValue
  * @param {String} statusValue
- * @returns {any}
+ * @returns {void}
  */
 const moveToFavorites = (id, positionInTheListValue, nameElement, backgroundImgValue, genderValue, speciesValue, nameValue, statusValue) => {
     nameElement.addEventListener('click', () => {
@@ -102,7 +120,7 @@ const moveToFavorites = (id, positionInTheListValue, nameElement, backgroundImgV
 };
 
 /**
- *? Generates a random letter from the alphabet.
+ * Generates a random letter from the alphabet.
  * @returns {String} a random letter from the alphabet in Uppercase.
  */
 const generateRandomLetter = () => {
@@ -123,7 +141,7 @@ const autocompleteNameAnimation = (elementHTML) => {
 
     elementHTML.textContent = "";
     const interval = setInterval(() => {
-        if (count < 9) {
+        if (count < 12) {
             elementHTML.textContent = name.substring(0, index) + generateRandomLetter();
             count++;
         } else {
@@ -138,6 +156,38 @@ const autocompleteNameAnimation = (elementHTML) => {
 };
 
 /**
+ * Does a fade-in effect when displays the images.
+ * @param {Element} element
+ * @param {String} backgroundImageValue
+ * @returns {void}
+ */
+const changeBackgroundImage = (element, backgroundImageValue) => {
+    const fadeDuration = 1000;
+    const stepsTransition = 50;
+    const initialOpacity = 0;
+    const backgroundImage = new Image();
+    let currentOpacity = initialOpacity;
+
+    backgroundImage.src = backgroundImageValue;
+    backgroundImage.onload = () => {
+        const intervalTime = fadeDuration / stepsTransition;
+
+        const fadeIn = setInterval(() => {
+            currentOpacity += 1 / stepsTransition;
+            element.style.backgroundImage = `url(${backgroundImageValue})`;
+            element.style.backgroundSize = 'cover';
+            element.style.opacity = currentOpacity;
+
+            if (currentOpacity >= 1) {
+                clearInterval(fadeIn);
+            }
+        }, intervalTime);
+    };
+}
+
+
+
+/**
  * Creates a card of the character selected with all his information.
  * @param {Number} positionInTheList Position of the character in the list.
  * @param {String} backgroundImg
@@ -145,7 +195,7 @@ const autocompleteNameAnimation = (elementHTML) => {
  * @param {String} species
  * @param {String} name
  * @param {String} status
- * @returns {any}
+ * @returns {void}
  */
 const createImgsCards = (positionInTheList, id, backgroundImg, gender, species, name, status) => {
     const cardElement = document.createElement('div');
@@ -190,21 +240,22 @@ const createImgsCards = (positionInTheList, id, backgroundImg, gender, species, 
     item3Element.textContent = name;
     item4Element.textContent = status;
 
-    enlargeImgSelected(triggerElement, positionInTheList);
+    changeBackgroundImage(item0Element, backgroundImg);
+    enlargeImgSelected(triggerElement, id);
     moveToFavorites(id, positionInTheList, item3Element, backgroundImg, gender, species, name, status);
     autocompleteNameAnimation(item3Element);
 };
 
 /**
  * Creates a "BackToMainPageBtn" in the container passed by parameter.
- * @returns {any}
+ * @returns {void}
  */
 const createBackToMainPage = (containerId) => { document.getElementById(containerId).innerHTML = '<button id="backMainPage-btn">VOLVER</button>'; };
 
 /**
  * Shows all the info about the character of the position given by parameter.
  * @param {Number} position of the character in the array.
- * @returns {any}
+ * @returns {void}
  */
 const showImgs = async (position) => {
     if (apiResponseData.results[position] !== undefined)
@@ -214,10 +265,10 @@ const showImgs = async (position) => {
 /**
  *  Displays the info of the firsts characters.
  * @param {Array} arrayData number of characters to display.
- * @returns {any}
+ * @returns {void}
  */
 const displayData = async (arrayData) => {
-    await fetchDataFromAPI();
+    await loadAllCharacters();
     document.getElementById('number-page').innerHTML = currentNumberPage;
     arrayData.forEach((_, index) => showImgs(index));
 };
@@ -225,21 +276,21 @@ const displayData = async (arrayData) => {
 /**
  * Creates a "nextBtn" in the container passed by parameter.
  * @param {Number} containerId
- * @returns {any}
+ * @returns {void}
  */
 const createNextBtn = (containerId) => { document.getElementById(containerId).innerHTML = `<button id="next-btn">SIGUIENTE</button>`; };
 
 /**
  * Creates a "previousBtn" in the container passed by parameter.
  * @param {Number} containerId
- * @returns {any}
+ * @returns {void}
  */
 const createPreviousBtn = (containerId) => { document.getElementById(containerId).innerHTML = `<button id="previous-btn">ANTERIOR</button>`; };
 
 /**
  *  Creates a "ShowMoreBtn" in the container passed by parameter.
  * @param {Number} containerId
- * @returns {any}
+ * @returns {void}
  */
 const createShowMoreBtn = (containerId) => { document.getElementById(containerId).innerHTML = `<button id="show-more">MOSTRAR MÁS</button>`; };
 
@@ -247,7 +298,7 @@ const createShowMoreBtn = (containerId) => { document.getElementById(containerId
  * Creates the both buttons.
  * The previous one and the next one.
  * @param {Number} containerId
- * @returns {any}
+ * @returns {void}
  */
 const createBothBtn = (containerId) => { document.getElementById(containerId).innerHTML = `<button id="previous-btn">ANTERIOR</button><button id="next-btn">SIGUIENTE</button>`; };
 
@@ -255,7 +306,7 @@ const createBothBtn = (containerId) => { document.getElementById(containerId).in
  * Listener function for the show-more btn.
  * 
  * Shows all the characters of the page.
- * @returns {any}
+ * @returns {void}
  */
 const listenerFunctionForShowMoreBtn = () => {
     deleteAllCards();
@@ -275,7 +326,7 @@ const listenerFunctionForShowMoreBtn = () => {
 
 /**
  * Displays the favorite list of characters.
- * @returns {any}
+ * @returns {void}
  */
 const displayFavorites = () => {
     deleteAllCards();
@@ -299,7 +350,7 @@ const displayFavorites = () => {
 
 /**
  * Changes the current page to the next one.
- * @returns {any}
+ * @returns {void}
  */
 const changeToNextPage = () => {
     document.getElementById('next-btn').addEventListener('click', () => {
@@ -314,7 +365,7 @@ const changeToNextPage = () => {
 
 /**
  * Changes the current page to the previous one.
- * @returns {any}
+ * @returns {void}
  */
 const changeToPreviousPage = () => {
     document.getElementById('previous-btn').addEventListener('click', () => {
