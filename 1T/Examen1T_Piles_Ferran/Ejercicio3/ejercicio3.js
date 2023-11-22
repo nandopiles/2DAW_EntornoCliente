@@ -24,24 +24,32 @@ const autocompleteNameAnimation = (elementHTML, word, callback) => {
     let count = 0;
 
     const interval = setInterval(() => {
-        if (count < 15 && index >= 0) {
-            const currentText = elementHTML.textContent;
-            const randomLetters = currentText.substring(0, index) + generateRandomLetter() + currentText.substring(index + 1);
-            elementHTML.textContent = randomLetters;
-            count++;
-        } else {
-            const currentText = elementHTML.textContent;
-            elementHTML.textContent = currentText.substring(0, index) + word[index] + currentText.substring(index + 1);
+        let currentText = '';
+
+        for (let i = 0; i < word.length; i++) {
+            if (i >= index) {
+                currentText += word[i];
+            } else {
+                currentText += generateRandomLetter();
+            }
+        }
+
+        elementHTML.textContent = currentText;
+
+        if (count >= 15 || index < 0) {
             count = 0;
             index--;
 
             if (index < 0) {
                 clearInterval(interval);
-                callback(); // Llama a la función de devolución de llamada cuando la palabra ha terminado de completarse
+                callback();
             }
+        } else {
+            count++;
         }
     }, 50);
 };
+
 
 
 /**
