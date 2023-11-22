@@ -30,6 +30,7 @@ const loadCharactersByPage = async (page) => {
         const response = await fetch(urlAPI + `?page=${page}`);
         if (response.ok) {
             apiResponseData = await response.json();
+            console.log(apiResponseData);
             maxPages = apiResponseData.info.pages;
             saveInLocalStorage();
         }
@@ -70,8 +71,12 @@ const searchCharacter = () => {
     document.getElementsByTagName('form')[0].addEventListener('submit', (event) => {
         event.preventDefault();
 
+
         const characterData = JSON.parse(window.localStorage.getItem(document.getElementsByTagName('input')[0].value));
-        displayModalWithCharacterSearched(characterData);
+        if (characterData === null)
+            alert('You have to wait until the API response');
+        else
+            displayModalWithCharacterSearched(characterData);
     });
 };
 
