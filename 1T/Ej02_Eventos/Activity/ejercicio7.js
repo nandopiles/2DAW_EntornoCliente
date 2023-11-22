@@ -35,6 +35,7 @@ Object.keys(nameSandwiches).forEach((key, i) => {
     document.getElementsByTagName("img")[i + 1].addEventListener('click', () => {
         document.getElementsByClassName("modal")[0].className = "show-modal"
         document.getElementsByTagName("h1")[1].innerHTML = `<a href=\"${nameSandwiches[key]}\">${key}</a>`
+        document.getElementById('modal-content').style.backgroundImage = "url(src/almuerzos/1.jpg)";
     })
 });
 

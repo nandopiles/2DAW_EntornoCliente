@@ -95,7 +95,7 @@ const enlargeImgSelected = (element, id) => {
 };
 
 /**
- *? Adds the character clicked into the favorite list.
+ * Adds the character clicked into the favorite list.
  * @param {Number} id
  * @param {Element} nameElement
  * @param {String} backgroundImgValue
