@@ -12,13 +12,18 @@ const imgFlowersPaths = [
 
 
 
+/**
+ * Gets a random url img.
+ * @param {Array} array
+ * @returns {String}
+ */
 const getRandomPhoto = (array) => {
     const randomIndex = Math.floor(Math.random() * array.length);
     return array[randomIndex];
 };
 
 /**
- * Displays the images in the current order.
+ * Displays the Fruit's imgs.
  * @returns {any}
  */
 const displayFruitsImgs = (interval) => {
@@ -29,7 +34,7 @@ const displayFruitsImgs = (interval) => {
 };
 
 /**
- * Displays the images in the current order.
+ * Displays the Flower's imgs.
  * @returns {any}
  */
 const displayFlowersImgs = (interval) => {
@@ -40,9 +45,11 @@ const displayFlowersImgs = (interval) => {
 };
 
 
+
 const intervalFruits = setInterval(() => {
     displayFruitsImgs(intervalFruits);
 }, 700);
+
 const intervalFlowers = setInterval(() => {
     displayFlowersImgs(intervalFlowers);
 }, 700);
