@@ -15,14 +15,28 @@ export class ArticleComponent {
   public currentImage: string = DEFAULT_IMAGE_URL;
   public textColor: string = originalColor;
 
+  /**
+   * Changes the img to a new img. The url must be passed by parameter.
+   * @param {string} newImageUrl
+   * @returns {void}
+   */
   public changeImage = (newImageUrl: string): void => {
     this.currentImage = newImageUrl;
   };
 
+  /**
+   * Changes the img to the default image declared at the beginning of the code.
+   * @returns {void}
+   */
   public resetImage = (): void => {
     this.currentImage = DEFAULT_IMAGE_URL;
   };
 
+  /**
+   * Changes the color of the paragraph to a new color.
+   * @param {MouseEvent} event
+   * @returns {void}
+   */
   public changeColor = (event: MouseEvent): void => {
     const paragraph: HTMLElement = <HTMLElement>event.target;
     const newColor = 'red';
@@ -31,6 +45,11 @@ export class ArticleComponent {
     paragraph.style.color = this.textColor;
   };
 
+  /**
+   * Resets the color of the paragraph to the original color declared at the beginning of the class.
+   * @param {MouseEvent} event
+   * @returns {void}
+   */
   public resetColor = (event: MouseEvent): void => {
     const paragraph: HTMLElement = <HTMLElement>event.target;
 

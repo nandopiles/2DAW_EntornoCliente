@@ -5,8 +5,13 @@ import { Component } from '@angular/core';
   standalone: true,
   imports: [],
   templateUrl: './menu.component.html',
-  styleUrl: './menu.component.css'
+  styleUrl: './menu.component.css',
 })
 export class MenuComponent {
+  public isDisabled: boolean = true;
 
+  public showOrHideList = (event: Event): void => {
+    event.stopPropagation();
+    this.isDisabled ? (this.isDisabled = false) : (this.isDisabled = true);
+  };
 }

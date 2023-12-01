@@ -1,17 +1,14 @@
 <menu>
-    <h2>Edificios</h2>
-    <ul>
-        <li><a href="https://cac.es/hemisferic/">Hemisferic</a></li>
-        <li><a href="https://cac.es/museu-de-les-ciencies/">Museo de las Ciencias</a></li>
-        <li><a
-                href="https://cac.es/oceanografic/?_gl=1*1gsa0wn*_ga*MTg4MjczNDkzNS4xNzAxNDMzMjI3*_ga_QDM4BQLMMP*MTcwMTQzMzIyNy4xLjEuMTcwMTQzMzM0Mi4yOS4wLjA.&_ga=2.255197441.824025514.1701433228-1882734935.1701433227">
-                Oceanogràfic</a>
-        </li>
-        <li><a
-                href="https://cac.es/palau-de-les-arts/?_gl=1*1gsa0wn*_ga*MTg4MjczNDkzNS4xNzAxNDMzMjI3*_ga_QDM4BQLMMP*MTcwMTQzMzIyNy4xLjEuMTcwMTQzMzM0Mi4yOS4wLjA.&_ga=2.255197441.824025514.1701433228-1882734935.1701433227">Palau
-                de les Arts</a></li>
-        <li><a
-                href="https://cac.es/umbracle/?_gl=1*1gsa0wn*_ga*MTg4MjczNDkzNS4xNzAxNDMzMjI3*_ga_QDM4BQLMMP*MTcwMTQzMzIyNy4xLjEuMTcwMTQzMzM0Mi4yOS4wLjA.&_ga=2.255197441.824025514.1701433228-1882734935.1701433227">Umbracle</a>
-        </li>
-    </ul>
+        <h2 (click)="showOrHideList($event)">Edificios</h2>
+        <ul [hidden]="isDisabled">
+                <li><a href="https://cac.es/hemisferic/">Hemisferic</a></li>
+                <li><a href="https://cac.es/museu-de-les-ciencies/">Museo de las Ciencias</a></li>
+                <li><a href="https://cac.es/oceanografic/?_gl=1*1gsa0wn*_ga*MTg4MjczNDkzNS4xNzAxNDMzMjI3*_ga_QDM4BQLMMP*MTcwMTQzMzIyNy4xLjEuMTcwMTQzMzM0Mi4yOS4wLjA.&_ga=2.255197441.824025514.1701433228-1882734935.1701433227">
+                                Oceanogràfic</a>
+                </li>
+                <li><a href="https://cac.es/palau-de-les-arts/?_gl=1*1gsa0wn*_ga*MTg4MjczNDkzNS4xNzAxNDMzMjI3*_ga_QDM4BQLMMP*MTcwMTQzMzIyNy4xLjEuMTcwMTQzMzM0Mi4yOS4wLjA.&_ga=2.255197441.824025514.1701433228-1882734935.1701433227">Palau
+                                de les Arts</a></li>
+                <li><a href="https://cac.es/umbracle/?_gl=1*1gsa0wn*_ga*MTg4MjczNDkzNS4xNzAxNDMzMjI3*_ga_QDM4BQLMMP*MTcwMTQzMzIyNy4xLjEuMTcwMTQzMzM0Mi4yOS4wLjA.&_ga=2.255197441.824025514.1701433228-1882734935.1701433227">Umbracle</a>
+                </li>
+        </ul>
 </menu>
