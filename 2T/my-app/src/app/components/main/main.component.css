@@ -10,5 +10,6 @@ main {
 
 .article-container {
     display: flex;
-    width: 600px;
+    width: 800px;
+    justify-content: right;
 }
