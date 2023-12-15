@@ -6,12 +6,12 @@
 <header>
     <nav class="header">
         <ul>
-            <li><a href="#">Frutas</a></li>
-            <li><a href="#">Verduras</a></li>
+            <li><a href="#" (click)="changeFruits()">Frutas</a></li>
+            <li><a href="#" (click)="changeVegetables()">Verduras</a></li>
         </ul>
     </nav>
-    <div class="banner">
-        <h2>Tu frutería de confianza</h2>
-        <h1>FRUTAS</h1>
+    <div class="banner" [ngStyle]="{'background-image': headerInfo.backgroundUrl}">
+        <h2>{{headerInfo.secondTitle}}</h2>
+        <h1>{{headerInfo.firstTitle}}</h1>
     </div>
 </header>
