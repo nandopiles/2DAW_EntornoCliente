@@ -1,9 +1,10 @@
+import { NgClass } from '@angular/common';
 import { Component } from '@angular/core';
 
 @Component({
   selector: 'app-main',
   standalone: true,
-  imports: [],
+  imports: [NgClass],
   templateUrl: './main.component.html',
   styleUrl: './main.component.css'
 })
@@ -36,4 +37,27 @@ export class MainComponent {
     "https://imagenes.20minutos.es/files/image_1920_1080/uploads/imagenes/2023/10/02/morada-blanca-charlota-para-que-se-utiliza-cada-tipo-de-cebolla.jpeg"
   ];
 
+  public visibleModal: boolean = false;
+  public selectedName: string = "";
+  public selectedImg: string = "";
+
+
+  /**
+   * Closes the modal window.
+   * @returns {void}
+   */
+  public closeModal(): void {
+    this.visibleModal = false;
+  }
+
+  /**
+   * Description
+   * @param {MouseEvent} event
+   * @returns {void}
+   */
+  public displayInfoInModal(event: MouseEvent, index: number, imgArray: string[], nameArray: string[]): void {
+    this.visibleModal = true;
+    this.selectedName = nameArray[index];
+    this.selectedImg = imgArray[index];
+  }
 }

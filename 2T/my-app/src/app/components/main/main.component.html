@@ -14,70 +14,27 @@
                 -->
             @for (element of firstImgArray; track $index) {
             <div class="card">
-                <div class="photo" style="background-image: url({{element}});">
+                <div class="photo" style="background-image: url({{element}});"
+                    (click)="displayInfoInModal($event, $index, firstImgArray, firstNameArray)">
                     <div class="title">{{ firstNameArray[$index] }}</div>
                 </div>
             </div>
             }
             @for (element of secondImgArray; track $index) {
             <div class="card">
-                <div class="photo" style="background-image: url({{element}});">
-                    <div class="title">{{ secondNameArray[$index] }}</div>
+                <div class="photo" style="background-image: url({{element}});"
+                    (click)="displayInfoInModal($event, $index, secondImgArray, secondNameArray)">
+                    <div class="title">{{secondNameArray[$index]}}</div>
                 </div>
             </div>
             }
-            <!-- <div class="card">
-                <div class="photo">
-                    <div class="title">Platanos</div>
-                </div>
-            </div>
-            <div class="card">
-                <div class="photo">
-                    <div class="title">Kiwis</div>
-                </div>
-            </div>
-            <div class="card">
-                <div class="photo">
-                    <div class="title">Manzanas</div>
-                </div>
-            </div>
-            <div class="card">
-                <div class="photo">
-                    <div class="title">Peras</div>
-                </div>
-            </div>
-        </div>
-
-        <div class="grid">
-            <div class="card">
-                <div class="photo">
-                    <div class="title">Lechuga</div>
-                </div>
-            </div>
-            <div class="card">
-                <div class="photo">
-                    <div class="title">Tomate</div>
-                </div>
-            </div>
-            <div class="card">
-                <div class="photo">
-                    <div class="title">Berenjena</div>
-                </div>
-            </div>
-            <div class="card">
-                <div class="photo">
-                    <div class="title">Cebolla</div>
-                </div>
-            </div>
-        </div> -->
         </div>
     </section>
-
 </main>
 
-<div class="modal">
-    <div class="modal-content">
-        <span class="close-button">×</span>
-        <h1>Nombre...</h1>
+<div class="modal" [ngClass]="visibleModal ? 'modal show-modal' : 'modal'">
+    <div class="modal-content" style="background-image: url({{selectedImg}});">
+        <span class="close-button" (click)="closeModal()">×</span>
+        <h1>{{selectedName}}</h1>
     </div>
 </div>
