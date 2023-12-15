@@ -12,7 +12,21 @@
       https://estaticos-cdn.prensaiberica.es/clip/7d08691e-b082-4540-ad4f-51dc14f8d23b_16-9-aspect-ratio_default_0.jpg
       https://imagenes.20minutos.es/files/image_1920_1080/uploads/imagenes/2023/10/02/morada-blanca-charlota-para-que-se-utiliza-cada-tipo-de-cebolla.jpeg
                 -->
+            @for (element of firstImgArray; track $index) {
             <div class="card">
+                <div class="photo" style="background-image: url({{element}});">
+                    <div class="title">{{ firstNameArray[$index] }}</div>
+                </div>
+            </div>
+            }
+            @for (element of secondImgArray; track $index) {
+            <div class="card">
+                <div class="photo" style="background-image: url({{element}});">
+                    <div class="title">{{ secondNameArray[$index] }}</div>
+                </div>
+            </div>
+            }
+            <!-- <div class="card">
                 <div class="photo">
                     <div class="title">Platanos</div>
                 </div>
@@ -55,6 +69,7 @@
                     <div class="title">Cebolla</div>
                 </div>
             </div>
+        </div> -->
         </div>
     </section>
 
