@@ -1,17 +1,23 @@
-import { NgStyle } from '@angular/common';
 import { Component } from '@angular/core';
 
 @Component({
   selector: 'app-header',
   standalone: true,
-  imports: [NgStyle],
+  imports: [],
   templateUrl: './header.component.html',
   styleUrl: './header.component.css'
 })
 export class HeaderComponent {
-  public option: number = 1;
+  public opacity: number = 1;
+  public title: string = "València";
 
-  public onClick(option: number): void {
-    this.option = option;
+  public changeOpacity(isEntering: boolean): void {
+    this.opacity = isEntering ? 0.2 : 1;
+  }
+
+  public changeTitle(): void {
+    const secondaryTitle: string = "València Nova!!";
+
+    this.title = secondaryTitle;
   }
 }

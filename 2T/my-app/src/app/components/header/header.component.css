@@ -1,0 +1,19 @@
+header {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+}
+
+h1 {
+    position: absolute;
+    font-size: 110px;
+    text-align: center;
+    color: #2f5;
+    z-index: 1;
+}
+
+img {
+    width: 100%;
+    height: auto;
+}
