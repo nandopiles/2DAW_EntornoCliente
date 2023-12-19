@@ -8,5 +8,9 @@ import { Component } from '@angular/core';
   styleUrl: './menu.component.css'
 })
 export class MenuComponent {
+  public isHidden: boolean = true;
 
+  public showHideMenu() {
+    this.isHidden = !this.isHidden;
+  }
 }
