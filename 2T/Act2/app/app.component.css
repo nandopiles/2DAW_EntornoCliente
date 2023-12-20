@@ -1,0 +1,8 @@
+body {
+    margin: -8px;
+}
+
+div.container {
+    display: flex;
+    justify-content: center;
+}

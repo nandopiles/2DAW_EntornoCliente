@@ -1,0 +1,27 @@
+<!-- Header -->
+<!-- Fotos para header
+    https://phantom-marca.unidadeditorial.es/f26736e71a6bfb79e3a2b0c631a1bf4e/resize/828/f/jpg/assets/multimedia/imagenes/2023/05/30/16854588843943.jpg
+    https://s1.eestatic.com/2018/11/21/ciencia/nutricion/nutricion-frutas-higiene_354976032_106782952_1706x960.jpg
+    -->
+<header>
+    <nav class="header">
+        <ul>
+            <li><a href="#" (click)="onClick(1)">Frutas</a></li>
+            <li><a href="#" (click)="onClick(2)">Verduras</a></li>
+        </ul>
+    </nav>
+    @if (option === 1) {
+    <div class="banner"
+        [ngStyle]="{'background-image': 'url(https://s1.eestatic.com/2018/11/21/ciencia/nutricion/nutricion-frutas-higiene_354976032_106782952_1706x960.jpg)'}">
+        <h2>Tu frutería de confianza</h2>
+        <h1>FRUTAS</h1>
+    </div>
+    } @else {
+    <div class="banner"
+        [ngStyle]="{'background-image': 'url(https://phantom-marca.unidadeditorial.es/f26736e71a6bfb79e3a2b0c631a1bf4e/resize/828/f/jpg/assets/multimedia/imagenes/2023/05/30/16854588843943.jpg)'}">
+        <h2>Tu verdulería de confianza</h2>
+        <h1>VERDURAS</h1>
+    </div>
+    }
+
+</header>
