@@ -3,14 +3,15 @@ section {
     height: 500px;
     margin-top: 15px;
     margin-right: 100px;
+    padding: 10px;
 }
 
 h2 {
     margin: 0;
+    cursor: pointer;
 }
 
 aside {
     background-color: #c0c0c0;
-
     border: 2px solid black;
 }

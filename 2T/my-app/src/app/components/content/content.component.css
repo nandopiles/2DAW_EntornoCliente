@@ -1,0 +1,20 @@
+.carousel-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+img {
+    width: 60%;
+}
+
+span {
+    color: black;
+    font-size: 90px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+span:hover {
+    color: #2f5;
+}
