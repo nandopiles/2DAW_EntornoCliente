@@ -8,8 +8,8 @@ import { Component } from '@angular/core';
   styleUrl: './view2.component.css'
 })
 export class View2Component {
-  public test: string[] = [
-    `<p>
+  public paragraphs: string[] = [
+    `
     <span class="first-letter">L</span>
     orem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
     incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud
@@ -17,7 +17,7 @@ export class View2Component {
     dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
     Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est
     laborum.
-</p>`,
+`,
     `<p>
 Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium,
 totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta
@@ -66,43 +66,45 @@ purus rhoncus ut. Proin sed mi pretium, pellentesque nisl eget, porta ex.`
   public isFront: boolean = true;
   public paragraphsToShow: string[] = [];
 
+
+  /**
+   * Shows the paragraphs that are in the range.
+   * @returns {void}
+   */
+  public showNextParagraph(): void {
+    this.cont++;
+    this.paragraphsToShow.push(this.paragraphs[this.cont - 1]);
+  }
+
+  /**
+   * Deletes the paragraphs that are not in the range.
+   * @returns {void}
+   */
+  public deletePreviousParagraph(): void {
+    this.cont--;
+    this.paragraphsToShow.splice(this.cont, 1);
+  }
+
+  /**
+   * Shows the paragraphs that it has to be displayed.
+   * @returns {void}
+   */
   public showOrHideText(): void {
     if (this.isFront) {
-      if (this.cont !== this.test.length) {
-        this.cont++;
-        this.paragraphsToShow.push(this.test[this.cont - 1]);
+      if (this.cont !== this.paragraphs.length) {
+        this.showNextParagraph();
       } else {
         this.isFront = false;
-        this.cont--;
-        this.paragraphsToShow.splice(this.cont, 1);
+        this.deletePreviousParagraph();
       }
     } else {
       if (this.cont !== 0) {
-        this.cont--;
-        this.paragraphsToShow.splice(this.cont, 1);
+        this.deletePreviousParagraph();
       } else {
         this.isFront = true;
-        this.cont++;
-        this.paragraphsToShow.push(this.test[this.cont - 1]);
+        this.showNextParagraph();
       }
     }
-
-    /* public showOrHideText(): void {
-      if (this.isFront) {
-        if (this.cont !== this.numParagraphs) {
-          this.cont++;
-        } else {
-          this.isFront = false;
-          this.cont--;
-        }
-      } else {
-        if (this.cont !== 0) {
-          this.cont--;
-        } else {
-          this.isFront = true;
-          this.cont++;
-        }
-      } */
 
     console.log(this.cont);
   }
