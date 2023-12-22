@@ -1,0 +1,34 @@
+<div class="header">
+    <h1>Ejercicio 1</h1>
+</div>
+<div class="content">
+    <section>
+        <div class="elementor-grid-3" [hidden]="isGridHidden">
+            <div class="container elementor-grid">
+                @for (item of imgs1; track $index) {
+                <div class="photo-container" (click)="enlargeImg($index, imgs1)">
+                    <div class="photo" style="background-image: url('{{ item }}')">
+                    </div>
+                </div>
+                }
+            </div>
+
+            <div class="container elementor-grid">
+                @for (item of imgs2; track $index) {
+                <div class="photo-container" (click)="enlargeImg($index, imgs2)">
+                    <div class="photo" style="background-image: url('{{ item }}')">
+                    </div>
+                </div>
+                }
+            </div>
+
+
+        </div>
+        <div class="container" [hidden]="isLgImgHidden">
+            <div class="photo-container" (click)="backToBeginning()">
+                <div class="photo" [ngStyle]="{'background': 'url('+ backgroundImg +')'}">
+                </div>
+            </div>
+        </div>
+    </section>
+</div>
