@@ -7,7 +7,7 @@
             <div class="container elementor-grid">
                 @for (item of imgs1; track $index) {
                 <div class="photo-container" (click)="enlargeImg($index, imgs1)">
-                    <div class="photo" style="background-image: url('{{ item }}')">
+                    <div class="photo" [ngStyle]="{'background-image': 'url(' + item +')'}">
                     </div>
                 </div>
                 }
@@ -16,17 +16,16 @@
             <div class="container elementor-grid">
                 @for (item of imgs2; track $index) {
                 <div class="photo-container" (click)="enlargeImg($index, imgs2)">
-                    <div class="photo" style="background-image: url('{{ item }}')">
+                    <div class="photo" [ngStyle]="{'background-image': 'url(' + item +')'}">
                     </div>
                 </div>
                 }
             </div>
-
-
         </div>
+        
         <div class="container" [hidden]="isLgImgHidden">
             <div class="photo-container" (click)="backToBeginning()">
-                <div class="photo" [ngStyle]="{'background': 'url('+ backgroundImg +')'}">
+                <div class="photo" [ngStyle]="{'background-image': 'url('+ backgroundImg +')'}">
                 </div>
             </div>
         </div>

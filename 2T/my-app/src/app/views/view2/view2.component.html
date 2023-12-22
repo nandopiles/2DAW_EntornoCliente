@@ -1,1 +1,11 @@
-<p>view2 works!</p>
+<div class="header">
+    <h1>Ejercicio 2</h1>
+</div>
+<div class="container">
+
+    <span class="quote" (click)="showOrHideText()">Lorem Ipsum</span>
+
+    @for (paragraph of paragraphsToShow; track $index) {
+    <p [innerHTML]="paragraph"></p>
+    }
+</div>
