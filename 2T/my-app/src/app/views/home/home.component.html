@@ -2,32 +2,15 @@
     <div class="first photo">
         <div>
             <div class="image-container2">
-                @for (path of imgPaths; track $index) {
-                <img [src]="path">
+                @for (element of elementsInfo; track $index) {
+                <img [src]="element.img" (click)="showDetailsImg()">
                 }
             </div>
         </div>
         <span class="caption">Memoria</span>
     </div>
-    <div>
-        <div class="first photo">
-            <div class="image-container2">
-                <img
-                    src="https://conductscience.com/maze/wp-content/uploads/2019/10/Diseases-and-conditions-that-affect-short-term-memory.png">
-                <img
-                    src="https://conductscience.com/maze/wp-content/uploads/2019/12/Diseases-and-conditions-that-affect-long-term-memory.png">
-                <img
-                    src="https://media.springernature.com/m685/springer-static/image/art%3A10.1038%2Fnrn2850/MediaObjects/41583_2010_Article_BFnrn2850_Fig1_HTML.jpg">
-                <img
-                    src="https://static.wixstatic.com/media/a7b893_49ac93653aea4e3da7f46b5de20e8ede~mv2.png/v1/fill/w_640,h_640,al_c,q_90,usm_0.66_1.00_0.01,enc_auto/a7b893_49ac93653aea4e3da7f46b5de20e8ede~mv2.png">
-                <img src="https://i.pinimg.com/736x/66/18/74/661874b7751be9d8421e955e2af4213a.jpg">
-                <img
-                    src="https://www.wikihow.com/images/thumb/7/75/Improve-Verbal-Memory-Step-5-Version-2.jpg/v4-460px-Improve-Verbal-Memory-Step-5-Version-2.jpg">
-            </div>
-            <span class="caption"><a>Link</a></span>
-        </div>
-    </div>
-    <div>
+
+    <div [hidden]="isDescriptionHomeHidden">
         <span class="quote">¿Qué es la memoria?</span>
         <p>
             <span class="first-letter">C</span>
@@ -48,7 +31,10 @@
             Una tercera fase es la de recuperación, que se refiere a la posibilidad de disponer de dicha información
             cuando la precisamos.
         </p>
-        <span class="quote">Existen seis tipos de memoria</span>
+
+
+        <!-- <span class="quote">Existen seis tipos de memoria</span>
+
         <p>
             <span class="first-letter">1 </span>Memoria corto plazo
         </p>
@@ -61,6 +47,7 @@
             la memoria de trabajo aquí.
             Implica el manejo y la organización de la información para el logro de un objetivo concreto.
         </p>
+
         <p>
             <span class="first-letter">2 </span>Memoria largo plazo
         </p>
@@ -109,8 +96,11 @@
         <p>
             La memoria verbal se refiere a la información almacenada en formato de palabras, ya sean escritas o
             verbales.
-        </p>
-        <span class="quote">Consejos para mejorar la memoria</span>
+        </p> -->
+
+
+
+        <!-- <span class="quote">Consejos para mejorar la memoria</span>
         <p>
             <span class="first-letter">B</span>
             uen descanso: durante el sueño se llevan a cabo diferentes procesos que implican la consolidación de los
@@ -146,7 +136,7 @@
             Por eso, el tipo de alimentación es una variable a considerar. Se recomienda incluir pescado, huevos,
             vegetales
             de hojas verdes, alimentos con omega 3.
-        </p>
+        </p>-->
 
     </div>
 </div>
