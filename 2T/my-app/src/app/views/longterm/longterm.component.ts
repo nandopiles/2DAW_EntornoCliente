@@ -27,7 +27,7 @@ export class LongtermComponent implements OnInit {
   /**
    * Makes an automatic carrousel that it will be changing the photos of the list every 5 seconds.
    * 
-   * ngOnInit => It's a method normally used for doing some initialing tasks.
+   * ngOnInit => It's a method normally used for doing some initialing tasks automatically.
    * @returns {void}
    */
   public ngOnInit(): void {

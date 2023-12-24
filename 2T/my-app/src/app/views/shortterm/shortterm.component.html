@@ -1,0 +1,141 @@
+<div class="journal">
+    <div class="first photo">
+        <div>
+            <div style="height: 500px">
+                <div style="float: left; clear: none; position: absolute; top: 100%;">
+                    <button (click)="prevPosition()">Previous</button>
+                    <button (click)="nextPosition()">Next</button>
+                </div>
+                <div style="display: flex; justify-content: left; align-items: center;">
+                    <h1 id="box-four">{{orderScenes[currentIndex].text}}</h1>
+                    <div id="box-zero"></div>
+                    <div style="display: flex; justify-content: left; align-items: center;">
+                        <div id="box-one" [ngStyle]="{
+                            'transition': orderScenes[currentIndex].transition,
+                            'left': orderScenes[currentIndex].firstLeftPosition,
+                            'background-image': 'url(' + orderScenes[currentIndex].firstPhoto + ')'
+                        }">
+                        </div>
+                    </div>
+                    <div style="display: flex; justify-content: left; align-items: center;">
+                        <div id="box-two" [ngStyle]="{
+                            'transition': orderScenes[currentIndex].transition,
+                            'left': orderScenes[currentIndex].secondLeftPosition,
+                            'background-image': 'url(' + orderScenes[currentIndex].secondPhoto + ')'
+                        }">
+                        </div>
+                    </div>
+                    <div style="display: flex; justify-content: left; align-items: center;">
+                        <div id="box-three" [ngStyle]="{
+                            'transition': orderScenes[currentIndex].transition,
+                            'left': orderScenes[currentIndex].thirdLeftPosition,
+                            'background-image': 'url(' + orderScenes[currentIndex].thirdPhoto + ')'
+                        }">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!--
+<div class="journal">
+    <div class="first photo">
+        <div>
+            <div style="height: 500px">
+                <div style="float: left; clear: none; position: absolute; top: 100%;">
+                    <button (click)="prevPosition()">Previous</button>
+                    <button (click)="nextPosition()">Next</button>
+                </div>
+                <div style="display: flex; justify-content: left; align-items: center;">
+                    <h1 id="box-four">Memoria Corto Plazo</h1>
+                    <div id="box-zero"></div>
+                    <div style="display: flex; justify-content: left; align-items: center;">
+                        <div id="box-one"
+                            style="transition: all 2s ease 0s; left: 0%; background-image: url(https://www.olympiabenefits.com/hubfs/Vega/Blog%20Pages/Psychology/What%20is%20memory.png);">
+                        </div>
+                    </div>
+                    <div style="display: flex; justify-content: left; align-items: center;">
+                        <div id="box-two"
+                            style="transition: all 2s ease 0s; left: 0%; background-image: url(https://images.ctfassets.net/cnu0m8re1exe/uTkqQAbjpnnpceaY9UzLE/2d49aaee28ca31631c33a02ff89b437c/brainresearch.jpg?fm=jpg&fl=progressive&w=660&h=433&fit=fill);">
+                        </div>
+                    </div>
+                    <div style="display: flex; justify-content: left; align-items: center;">
+                        <div id="box-three"
+                            style="transition: all 2s ease 0s; left: 0%; background-image: url(https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRZ95HvxEmQ-GQBMSL48P-DpN445HLKgqG2EmJu57Fr8Ix4rw0mkf01iMh3Hew2gS3I9JI&usqp=CAU);">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="journal">
+    <div class="first photo">
+        <div>
+            <div style="height: 500px">
+                <div style="float: left; clear: none; position: absolute; top: 100%;">
+                    <button>Previous</button>
+                    <button>Next</button>
+                </div>
+                <div style="display: flex; justify-content: left; align-items: center;">
+                    <h1 id="box-four">La memoria a corto plazo es la capacidad para almacenar, mantener y recuperar
+                        cierta cantidad de información durante un corto periodo de tiempo.</h1>
+                    <div id="box-zero"></div>
+                    <div style="display: flex; justify-content: left; align-items: center;">
+                        <div id="box-one"
+                            style="transition: all 2s ease 0s; left: 0%; background-image: url(https://cdn.psychologytoday.com/sites/default/files/styles/article-inline-half/public/field_blog_entry_images/1369847707_4085_memory-1.jpg?itok=aZRKeJXR);">
+                        </div>
+                    </div>
+                    <div style="display: flex; justify-content: left; align-items: center;">
+                        <div id="box-two"
+                            style="transition: all 2s ease 0s; left: 0%; background-image: url(https://media.npr.org/assets/img/2023/08/07/gettyimages-1440469647-db0c65c135844b757df227afebfa240fd400630c.jpg);">
+                        </div>
+                    </div>
+                    <div style="display: flex; justify-content: left; align-items: center;">
+                        <div id="box-three"
+                            style="transition: all 2s ease 0s; left: 0%; background-image: url(https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTF8a2YKUyrUrEEkYxECnP4zI3LXpfEhhEZhg&usqp=CAU);">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="journal">
+    <div class="first photo">
+        <div>
+            <div style="height: 500px">
+                <div style="float: left; clear: none; position: absolute; top: 100%;">
+                    <button>Previous</button>
+                    <button>Next</button>
+                </div>
+                <div style="display: flex; justify-content: left; align-items: center;">
+                    <h1 id="box-four">Cuando la información pasa a estar disponible por un tiempo indefinido, es
+                        cuando hablamos de memoria a largo plazo</h1>
+                    <div id="box-zero"></div>
+                    <div style="display: flex; justify-content: left; align-items: center;">
+                        <div id="box-one"
+                            style="transition: all 2s ease 0s; left: 0%; background-image: url(https://mindworks.org/app/uploads/2023/06/Does-Meditation-Improve-memory.jpg);">
+                        </div>
+                    </div>
+                    <div style="display: flex; justify-content: left; align-items: center;">
+                        <div id="box-two"
+                            style="transition: all 2s ease 0s; left: 0%; background-image: url(https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTERe-RZMXEfeALxm-QfjABDm_b2ggQEBJdng&usqp=CAU);">
+                        </div>
+                    </div>
+                    <div style="display: flex; justify-content: left; align-items: center;">
+                        <div id="box-three"
+                            style="transition: all 2s ease 0s; left: 0%; background-image: url(https://images.theconversation.com/files/171522/original/file-20170530-23699-itx0un.jpg?ixlib=rb-1.1.0&rect=0%2C181%2C2987%2C2163&q=45&auto=format&w=926&fit=clip);">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div> -->
