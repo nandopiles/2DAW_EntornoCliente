@@ -1,17 +1,29 @@
 <div class="journal">
-    <div class="first photo">
+    <div class="first photo" [hidden]="isDescriptionHomeHidden">
         <div>
             <div class="image-container2">
                 @for (element of elementsInfo; track $index) {
-                <img [src]="element.img" (click)="showDetailsImg()">
+                <img [src]="element.img" (click)="showDetailsImg(element)">
                 }
             </div>
         </div>
         <span class="caption">Memoria</span>
     </div>
 
+    <div class="first photo" [hidden]="isDescriptionTypeMemoryHidden">
+        <div>
+            <div class="image-container">
+                <img [src]="selectedMemoryDetails.img">
+            </div>
+        </div>
+        <span class="caption">{{selectedMemoryDetails.title}}</span>
+    </div>
+
+
+
     <div [hidden]="isDescriptionHomeHidden">
         <span class="quote">¿Qué es la memoria?</span>
+
         <p>
             <span class="first-letter">C</span>
             uando nos referimos a la memoria, no hablamos de un órgano concreto, sino de diversas
@@ -31,9 +43,16 @@
             Una tercera fase es la de recuperación, que se refiere a la posibilidad de disponer de dicha información
             cuando la precisamos.
         </p>
+    </div>
 
+    <div [hidden]="isDescriptionTypeMemoryHidden">
+        <span class="quote">Existen seis tipos de memoria</span>
 
-        <!-- <span class="quote">Existen seis tipos de memoria</span>
+        @for (paragraph of selectedMemoryDetails.paragraphs; track $index) {
+        <p [innerHTML]="paragraph"></p>
+        }
+    </div>
+    <!-- <span class="quote">Existen seis tipos de memoria</span>
 
         <p>
             <span class="first-letter">1 </span>Memoria corto plazo
@@ -100,7 +119,7 @@
 
 
 
-        <!-- <span class="quote">Consejos para mejorar la memoria</span>
+    <!-- <span class="quote">Consejos para mejorar la memoria</span>
         <p>
             <span class="first-letter">B</span>
             uen descanso: durante el sueño se llevan a cabo diferentes procesos que implican la consolidación de los
@@ -137,6 +156,4 @@
             vegetales
             de hojas verdes, alimentos con omega 3.
         </p>-->
-
-    </div>
 </div>
