@@ -9,13 +9,16 @@ import { Component } from '@angular/core';
   styleUrl: './game.component.css'
 })
 export class GameComponent {
-  public defaultColor: string = "#2176FF";
   public colors: string[] = ["red", "yellow", "green", "purple"];
   public colorCombination: string[] = [];
   public winnerCombination: string[] = [];
   public shuffledCombination: string[] = [];
-  public intervalId: any;
+  public defaultColor: string = "#2176FF";
   public timeShuffling: number = 3000;
+  public timesFailed: number = 0;
+  public selectedCellIndex: number | null = null;
+  public intervalId: any;
+  public isContinuePlaying: boolean = true;
 
 
 
@@ -62,6 +65,36 @@ export class GameComponent {
       this.stopShuffling();
       (isWinnerCombination) ? console.log(this.winnerCombination) : console.log(this.shuffledCombination);
     }, this.timeShuffling);
+  }
+
+  /**
+   * Swaps the color with other square.
+   * 
+   * First u have to click to any square and when u click to another one they will swap the colors.
+   * @param {number} index of the square to swap.
+   * @returns {void}
+   */
+  public changeColorCell(index: number): void {
+    if (this.selectedCellIndex === null)
+      this.selectedCellIndex = index; // no cell is selected yet
+    else {
+      // swap colors
+      [this.colorCombination[this.selectedCellIndex], this.colorCombination[index]] = [
+        this.colorCombination[index],
+        this.colorCombination[this.selectedCellIndex],
+      ];
+      this.selectedCellIndex = null; // another time to null to reset the index of the cell clicked.
+    }
+  }
+
+  /**
+   * Checks if the user combination is the same as the winner combination.
+   * @returns {any}
+   */
+  public checkResult(): void {
+    if (this.timesFailed >= 3) {
+      this.isContinuePlaying = false;
+    }
   }
 
   /**
