@@ -89,6 +89,9 @@ export class HomeComponent {
 
   public isDescriptionHomeHidden: boolean = false;
   public isDescriptionTypeMemoryHidden: boolean = true;
+  public isAdvicesHidden: boolean = true;
+
+  public associatedImg: string = "";
   public selectedMemoryDetails: IKeyValue = {
     title: "",
     img: "",
@@ -108,5 +111,27 @@ export class HomeComponent {
     this.isDescriptionTypeMemoryHidden = false;
 
     this.selectedMemoryDetails = selectedMemoryDetails;
+  }
+
+  /**
+   * Displays the img associated with the type of memory selected.
+   * @param {string} associatedImg
+   * @returns {void}
+   */
+  public showAdvices(associatedImg: string): void {
+    this.isDescriptionTypeMemoryHidden = true;
+    this.isAdvicesHidden = false;
+
+    this.associatedImg = associatedImg;
+  }
+
+  /**
+   * Returns to the default view loaded at the begginning.
+   * @returns {void}
+   */
+  public returnToHomePage(): void {
+    this.isDescriptionHomeHidden = false;
+    this.isDescriptionTypeMemoryHidden = true;
+    this.isAdvicesHidden = true;
   }
 }

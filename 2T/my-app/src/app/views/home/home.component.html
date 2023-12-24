@@ -1,5 +1,7 @@
 <div class="journal">
-    <div class="first photo" [hidden]="isDescriptionHomeHidden">
+    @if (!isDescriptionHomeHidden) {
+    <!-- Photos -->
+    <div class="first photo">
         <div>
             <div class="image-container2">
                 @for (element of elementsInfo; track $index) {
@@ -10,18 +12,8 @@
         <span class="caption">Memoria</span>
     </div>
 
-    <div class="first photo" [hidden]="isDescriptionTypeMemoryHidden">
-        <div>
-            <div class="image-container">
-                <img [src]="selectedMemoryDetails.img">
-            </div>
-        </div>
-        <span class="caption">{{selectedMemoryDetails.title}}</span>
-    </div>
-
-
-
-    <div [hidden]="isDescriptionHomeHidden">
+    <!-- Description -->
+    <div>
         <span class="quote">¿Qué es la memoria?</span>
 
         <p>
@@ -44,116 +36,73 @@
             cuando la precisamos.
         </p>
     </div>
+    } @else if(!isDescriptionTypeMemoryHidden){
+    <!-- Specific Photo -->
+    <div class="first photo">
+        <div>
+            <div class="image-container">
+                <img [src]="selectedMemoryDetails.img" (click)="showAdvices(selectedMemoryDetails.associatedImg)">
+            </div>
+        </div>
+        <span class="caption">{{selectedMemoryDetails.title}}</span>
+    </div>
 
-    <div [hidden]="isDescriptionTypeMemoryHidden">
+    <!-- Information -->
+    <div>
         <span class="quote">Existen seis tipos de memoria</span>
 
         @for (paragraph of selectedMemoryDetails.paragraphs; track $index) {
         <p [innerHTML]="paragraph"></p>
         }
     </div>
-    <!-- <span class="quote">Existen seis tipos de memoria</span>
+    } @else if(!isAdvicesHidden){
+    <!-- Linked Photo -->
+    <div class="first photo">
+        <div>
+            <div class="image-container">
+                <img [src]="associatedImg" (click)="returnToHomePage()">
+            </div>
+        </div>
+        <span class="caption">{{selectedMemoryDetails.title}}</span>
+    </div>
 
-        <p>
-            <span class="first-letter">1 </span>Memoria corto plazo
-        </p>
-        <p>
-            Esta memoria tiene una capacidad limitada. En general, puede retener como máximo 7 ítems de manera
-            simultánea. También el tiempo
-            de retención de la información es breve, con un máximo de 20 segundos. Aquí la atención y la
-            concentración son claves, ya que si
-            estamos distraídos, la capacidad de la memoria de corto plazo se ve reducida. Además, suele mencionarse
-            la memoria de trabajo aquí.
-            Implica el manejo y la organización de la información para el logro de un objetivo concreto.
-        </p>
-
-        <p>
-            <span class="first-letter">2 </span>Memoria largo plazo
-        </p>
-        <p>
-            La memoria de largo plazo es más estable y duradera. Dentro de ella, como ya adelantamos, se ha
-            propuesto una subclasificación,
-            donde encontramos la de tipo declarativa y la procedimental.
-        </p>
-        <p>
-            <span class="first-letter">3 </span>Memoria declarativa
-        </p>
-        <p>
-            Como parte de la memoria de largo plazo, se refiere al contenido de lo que se almacena. La memoria
-            episódica nos permite recordar
-            hechos concretos referidos a nuestra propia biografía y que están vinculados a un tiempo y un lugar
-            determinado. En ella se alojan
-            sucesos que identificamos como personales.
-        </p>
-        <p>
-            Por otro lado, la memoria semántica nos permite recordar en términos más generales y está vinculada a
-            nuestra comprensión del mundo.
-            También se aloja aquí el significado de conceptos y el vocabulario.
-        </p>
-        <p>
-            <span class="first-letter">4 </span>Memoria procedimental
-        </p>
-        <p>
-            Esta otra parte de la memoria a largo plazo se refiere al cómo (el paso a paso de una receta, por
-            ejemplo). Permite recuperar información sobre habilidades motoras.
-        </p>
-        <p>
-            En este caso, cuando la información se consolida, aparece en automático, como por inercia. No es
-            necesario repasar el procedimiento una y otra vez.
-        </p>
-        <p>
-            <span class="first-letter">5 </span>Memoria sensorial
-        </p>
-        <p>
-            Respecto al formato de la información, la memoria sensorial es aquella que registra o almacena la
-            información considerando los sentidos. Nos acordamos del olor de la torta de la abuela o del tacto suave
-            de nuestra mascota, por ejemplo.
-        </p>
-        <p>
-            <span class="first-letter">6 </span>Memoria verbal
-        </p>
-        <p>
-            La memoria verbal se refiere a la información almacenada en formato de palabras, ya sean escritas o
-            verbales.
-        </p> -->
-
-
-
-    <!-- <span class="quote">Consejos para mejorar la memoria</span>
-        <p>
-            <span class="first-letter">B</span>
-            uen descanso: durante el sueño se llevan a cabo diferentes procesos que implican la consolidación de los
-            recuerdos
-            y el aprendizaje, así como la selección de la información que debe descartarse.
-        </p>
-        <p>
-            <span class="first-letter">E</span>
-            stado emocional: es una influencia respecto de aquellas cosas a las que les prestamos atención, lo que
-            recordamos
-            y lo que olvidamos. Por ejemplo, si estamos con mucha ansiedad, será difícil que podamos prestar
-            atención a una
-            conversación o que podamos conectarnos con un suceso en particular.
-        </p>
-        <p>
-            <span class="first-letter">D</span>
-            isminuir la cantidad de fuentes de estimulación: si queremos retener cierta información, lo mejor es que
-            tratemos
-            de capturarla en detalle, focalizándonos en ella. En ese caso, es mejor evitar estar pendiente del
-            televisor, del
-            celular, de la conversación de la persona que está al lado.
-        </p>
-        <p>
-            <span class="first-letter">J</span>
-            ugar: existen distintas propuestas lúdicas que permiten fortalecer la memoria, al combinar distintas
-            acciones
-            como completar palabras, preguntas y respuestas para recordar eventos o datos.
-        </p>
-        <p>
-            <span class="first-letter">C</span>
-            uidar la alimentación: el buen funcionamiento de la memoria también tiene su correlato en la dieta que
-            llevamos:
-            Por eso, el tipo de alimentación es una variable a considerar. Se recomienda incluir pescado, huevos,
-            vegetales
-            de hojas verdes, alimentos con omega 3.
-        </p>-->
+    <!-- Advices -->
+    <span class="quote">Consejos para mejorar la memoria</span>
+    <p>
+        <span class="first-letter">B</span>
+        uen descanso: durante el sueño se llevan a cabo diferentes procesos que implican la consolidación de los
+        recuerdos
+        y el aprendizaje, así como la selección de la información que debe descartarse.
+    </p>
+    <p>
+        <span class="first-letter">E</span>
+        stado emocional: es una influencia respecto de aquellas cosas a las que les prestamos atención, lo que
+        recordamos
+        y lo que olvidamos. Por ejemplo, si estamos con mucha ansiedad, será difícil que podamos prestar
+        atención a una
+        conversación o que podamos conectarnos con un suceso en particular.
+    </p>
+    <p>
+        <span class="first-letter">D</span>
+        isminuir la cantidad de fuentes de estimulación: si queremos retener cierta información, lo mejor es que
+        tratemos
+        de capturarla en detalle, focalizándonos en ella. En ese caso, es mejor evitar estar pendiente del
+        televisor, del
+        celular, de la conversación de la persona que está al lado.
+    </p>
+    <p>
+        <span class="first-letter">J</span>
+        ugar: existen distintas propuestas lúdicas que permiten fortalecer la memoria, al combinar distintas
+        acciones
+        como completar palabras, preguntas y respuestas para recordar eventos o datos.
+    </p>
+    <p>
+        <span class="first-letter">C</span>
+        uidar la alimentación: el buen funcionamiento de la memoria también tiene su correlato en la dieta que
+        llevamos:
+        Por eso, el tipo de alimentación es una variable a considerar. Se recomienda incluir pescado, huevos,
+        vegetales
+        de hojas verdes, alimentos con omega 3.
+    </p>
+    }
 </div>
