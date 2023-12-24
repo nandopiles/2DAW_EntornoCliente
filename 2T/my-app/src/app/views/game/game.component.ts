@@ -18,7 +18,7 @@ export class GameComponent {
   public timesFailed: number = 0;
   public selectedCellIndex: number | null = null;
   public intervalId: any;
-  public isContinuePlaying: boolean = true;
+  public isGameOver: boolean = false;
 
 
 
@@ -92,8 +92,13 @@ export class GameComponent {
    * @returns {any}
    */
   public checkResult(): void {
+    if (this.winnerCombination !== this.shuffledCombination) {
+      alert("Yee t'has equivocat!!, torna a intentar-ho");
+      this.timesFailed++;
+      console.log(this.timesFailed);
+    }
     if (this.timesFailed >= 3) {
-      this.isContinuePlaying = false;
+      this.isGameOver = true;
     }
   }
 
