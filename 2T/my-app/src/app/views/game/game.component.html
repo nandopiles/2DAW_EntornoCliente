@@ -5,18 +5,18 @@
         <table style="margin-left:auto;margin-right:auto;">
             <tr>
                 <td class="activity" [ngStyle]="{
-                'background-color': colorCombination[0] || defaultColor
+                'background-color': currentColorCombination[0] || defaultColor
             }" (click)="changeColorCell(0)"></td>
                 <td class="activity" [ngStyle]="{
-                'background-color': colorCombination[1] || defaultColor
+                'background-color': currentColorCombination[1] || defaultColor
             }" (click)="changeColorCell(1)"></td>
             </tr>
             <tr>
                 <td class="activity" [ngStyle]="{
-                'background-color': colorCombination[2] || defaultColor
+                'background-color': currentColorCombination[2] || defaultColor
                 }" (click)="changeColorCell(2)"></td>
                 <td class="activity" [ngStyle]="{
-                'background-color': colorCombination[3] || defaultColor
+                'background-color': currentColorCombination[3] || defaultColor
             }" (click)="changeColorCell(3)"></td>
             </tr>
         </table>

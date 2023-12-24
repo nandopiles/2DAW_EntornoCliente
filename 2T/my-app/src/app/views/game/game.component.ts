@@ -10,7 +10,7 @@ import { Component } from '@angular/core';
 })
 export class GameComponent {
   public colors: string[] = ["red", "yellow", "green", "purple"];
-  public colorCombination: string[] = [];
+  public currentColorCombination: string[] = [];
   public winnerCombination: string[] = [];
   public shuffledCombination: string[] = [];
   public defaultColor: string = "#2176FF";
@@ -44,10 +44,10 @@ export class GameComponent {
     }
 
     if (isWinnerCombination) {
-      this.colorCombination = generatedCombination;
+      this.currentColorCombination = generatedCombination;
       this.winnerCombination = generatedCombination;
     } else {
-      this.colorCombination = generatedCombination;
+      this.currentColorCombination = generatedCombination;
       this.shuffledCombination = generatedCombination;
     }
   }
@@ -79,9 +79,9 @@ export class GameComponent {
       this.selectedCellIndex = index; // no cell is selected yet
     else {
       // swap colors
-      [this.colorCombination[this.selectedCellIndex], this.colorCombination[index]] = [
-        this.colorCombination[index],
-        this.colorCombination[this.selectedCellIndex],
+      [this.currentColorCombination[this.selectedCellIndex], this.currentColorCombination[index]] = [
+        this.currentColorCombination[index],
+        this.currentColorCombination[this.selectedCellIndex],
       ];
       this.selectedCellIndex = null; // another time to null to reset the index of the cell clicked.
     }
@@ -92,13 +92,15 @@ export class GameComponent {
    * @returns {any}
    */
   public checkResult(): void {
-    if (this.winnerCombination !== this.shuffledCombination) {
+    if (this.winnerCombination.every((element, index) => element !== this.currentColorCombination[index])) {
       alert("Yee t'has equivocat!!, torna a intentar-ho");
       this.timesFailed++;
-      console.log(this.timesFailed);
-    }
-    if (this.timesFailed >= 3) {
-      this.isGameOver = true;
+
+      if (this.timesFailed >= 3) {
+        this.isGameOver = true;
+      }
+    } else {
+      console.log("hell yeah!");
     }
   }
 
