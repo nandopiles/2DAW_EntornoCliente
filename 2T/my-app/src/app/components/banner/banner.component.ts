@@ -12,14 +12,21 @@ export class BannerComponent {
   public defaultSize: string = '150px';
   public fontSize = this.defaultSize;
 
-  public incrementSize() {
+  /**
+   * Increment the size of the title of the banner.
+   * @returns {void}
+   */
+  public incrementSize(): void {
     const customSize: string = '220px';
 
     this.fontSize = customSize;
   }
 
-  public backToDefaultSize() {
+  /**
+   * Returns to the default size of the title of the banner.
+   * @returns {void}
+   */
+  public backToDefaultSize(): void {
     this.fontSize = this.defaultSize;
   }
-
 }
