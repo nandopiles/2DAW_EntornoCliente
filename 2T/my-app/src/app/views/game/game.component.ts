@@ -9,16 +9,21 @@ import { Component } from '@angular/core';
   styleUrl: './game.component.css'
 })
 export class GameComponent {
-  public colors: string[] = ["red", "yellow", "green", "purple"];
+  public colorsLevel1: string[] = ["red", "yellow", "green", "purple"];
+  public colorsLevel2: string[] = ["red", "yellow", "green", "purple", "blue", "violet", "orange", "grey", "black"];
+  public colorsLevel3: string[] = ["red", "yellow", "green", "purple", "blue", "violet", "orange", "grey", "black", "silver", "fuchsia", "lime", "navy", "aqua", "chartreuse", "cornflowerblue"];
   public currentColorCombination: string[] = [];
   public winnerCombination: string[] = [];
-  public shuffledCombination: string[] = [];
   public defaultColor: string = "#2176FF";
   public timeShuffling: number = 3000;
   public timesFailed: number = 0;
   public selectedCellIndex: number | null = null;
   public intervalId: any;
   public isGameOver: boolean = false;
+  public isWon: boolean = false;
+  public isLevel1: boolean = true;
+  public isLevel2: boolean = false;
+  public isLevel3: boolean = false;
 
 
 
@@ -35,7 +40,15 @@ export class GameComponent {
    * @returns {void}
    */
   public shuffleColors(isWinnerCombination: boolean): void {
-    const generatedCombination = [...this.colors]; // creates a copy of the colors array to not changing it the original one.
+    let generatedCombination: string[] = [];
+
+    if (this.isLevel1) {
+      generatedCombination = [...this.colorsLevel1]; // creates a copy of the colors array to not changing it the original one.
+    } else if (this.isLevel2) {
+      generatedCombination = [...this.colorsLevel2];
+    } else if (this.isLevel3) {
+      generatedCombination = [...this.colorsLevel3];
+    }
 
     // Fisher-Yates algorithm to shuffle
     for (let i = generatedCombination.length - 1; i > 0; i--) {
@@ -48,7 +61,6 @@ export class GameComponent {
       this.winnerCombination = generatedCombination;
     } else {
       this.currentColorCombination = generatedCombination;
-      this.shuffledCombination = generatedCombination;
     }
   }
 
@@ -63,7 +75,7 @@ export class GameComponent {
 
     setTimeout(() => {
       this.stopShuffling();
-      (isWinnerCombination) ? console.log(this.winnerCombination) : console.log(this.shuffledCombination);
+      if (isWinnerCombination) console.log(this.winnerCombination);
     }, this.timeShuffling);
   }
 
@@ -88,23 +100,6 @@ export class GameComponent {
   }
 
   /**
-   * Checks if the user combination is the same as the winner combination.
-   * @returns {any}
-   */
-  public checkResult(): void {
-    if (this.winnerCombination.every((element, index) => element !== this.currentColorCombination[index])) {
-      alert("Yee t'has equivocat!!, torna a intentar-ho");
-      this.timesFailed++;
-
-      if (this.timesFailed >= 3) {
-        this.isGameOver = true;
-      }
-    } else {
-      console.log("hell yeah!");
-    }
-  }
-
-  /**
    * Starts to shuffle the colors ......
    * @returns {void}
    */
@@ -114,5 +109,35 @@ export class GameComponent {
     setTimeout(() => {
       this.generateCombination(false);
     }, this.timeShuffling + 2000);
+  }
+
+  /**
+   * Checks if the user combination is the same as the winner combination.
+   * @returns {void}
+   */
+  public checkResult(): void {
+    if (JSON.stringify(this.winnerCombination) !== JSON.stringify(this.currentColorCombination)) { // converts the array into a JSON and then compares with the other one.
+      alert("Yee t'has equivocat!!, torna a intentar-ho");
+      this.timesFailed++;
+
+      if (this.timesFailed >= 3) {
+        this.isGameOver = true;
+      }
+    } else {
+      // correct combination.
+      console.log("hell yeah!");
+      if (this.isLevel1) {
+        this.isLevel1 = false;
+        this.isLevel2 = true;
+        this.startGame();
+      } else if (this.isLevel2) {
+        this.isLevel2 = false;
+        this.isLevel3 = true;
+        this.startGame();
+      } else if (this.isLevel3) {
+        this.isLevel3 = false;
+        this.isWon = true;
+      }
+    }
   }
 }

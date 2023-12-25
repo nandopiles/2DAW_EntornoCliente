@@ -1,25 +1,124 @@
 <div class="container">
     <h1 [hidden]="!isGameOver">Game over!</h1>
-    <div [hidden]="isGameOver">
+    <h1 [hidden]="!isWon">You win!</h1>
+    <div [hidden]="isGameOver || isWon">
         <h1 (click)="startGame()">Let's play!</h1>
+
+        @if (isLevel1) {
         <table style="margin-left:auto;margin-right:auto;">
             <tr>
                 <td class="activity" [ngStyle]="{
-                'background-color': currentColorCombination[0] || defaultColor
-            }" (click)="changeColorCell(0)"></td>
+                    'background-color': currentColorCombination[0] || defaultColor
+                }" (click)="changeColorCell(0)"></td>
                 <td class="activity" [ngStyle]="{
-                'background-color': currentColorCombination[1] || defaultColor
-            }" (click)="changeColorCell(1)"></td>
+                    'background-color': currentColorCombination[1] || defaultColor
+                }" (click)="changeColorCell(1)"></td>
             </tr>
             <tr>
                 <td class="activity" [ngStyle]="{
-                'background-color': currentColorCombination[2] || defaultColor
-                }" (click)="changeColorCell(2)"></td>
+                    'background-color': currentColorCombination[2] || defaultColor
+                    }" (click)="changeColorCell(2)"></td>
                 <td class="activity" [ngStyle]="{
-                'background-color': currentColorCombination[3] || defaultColor
-            }" (click)="changeColorCell(3)"></td>
+                    'background-color': currentColorCombination[3] || defaultColor
+                }" (click)="changeColorCell(3)"></td>
             </tr>
         </table>
+        } @else if (isLevel2) {
+        <table style="margin-left:auto;margin-right:auto;">
+            <tr>
+                <td class="activity" [ngStyle]="{
+                        'background-color': currentColorCombination[0] || defaultColor
+                    }" (click)="changeColorCell(0)"></td>
+                <td class="activity" [ngStyle]="{
+                        'background-color': currentColorCombination[1] || defaultColor
+                    }" (click)="changeColorCell(1)"></td>
+                <td class="activity" [ngStyle]="{
+                        'background-color': currentColorCombination[2] || defaultColor
+                    }" (click)="changeColorCell(2)"></td>
+            </tr>
+            <tr>
+                <td class="activity" [ngStyle]="{
+                        'background-color': currentColorCombination[3] || defaultColor
+                        }" (click)="changeColorCell(3)"></td>
+                <td class="activity" [ngStyle]="{
+                        'background-color': currentColorCombination[4] || defaultColor
+                    }" (click)="changeColorCell(4)"></td>
+                <td class="activity" [ngStyle]="{
+                        'background-color': currentColorCombination[5] || defaultColor
+                    }" (click)="changeColorCell(5)"></td>
+            </tr>
+            <tr>
+                <td class="activity" [ngStyle]="{
+                        'background-color': currentColorCombination[6] || defaultColor
+                        }" (click)="changeColorCell(6)"></td>
+                <td class="activity" [ngStyle]="{
+                        'background-color': currentColorCombination[7] || defaultColor
+                    }" (click)="changeColorCell(7)"></td>
+                <td class="activity" [ngStyle]="{
+                        'background-color': currentColorCombination[8] || defaultColor
+                    }" (click)="changeColorCell(8)"></td>
+            </tr>
+        </table>
+        } @else if (isLevel3) {
+        <table style="margin-left:auto;margin-right:auto;">
+            <tr>
+                <td class="activity" [ngStyle]="{
+                            'background-color': currentColorCombination[0] || defaultColor
+                        }" (click)="changeColorCell(0)"></td>
+                <td class="activity" [ngStyle]="{
+                            'background-color': currentColorCombination[1] || defaultColor
+                        }" (click)="changeColorCell(1)"></td>
+                <td class="activity" [ngStyle]="{
+                            'background-color': currentColorCombination[2] || defaultColor
+                        }" (click)="changeColorCell(2)"></td>
+                <td class="activity" [ngStyle]="{
+                            'background-color': currentColorCombination[3] || defaultColor
+                            }" (click)="changeColorCell(3)"></td>
+            </tr>
+            <tr>
+                <td class="activity" [ngStyle]="{
+                            'background-color': currentColorCombination[4] || defaultColor
+                            }" (click)="changeColorCell(4)"></td>
+                <td class="activity" [ngStyle]="{
+                            'background-color': currentColorCombination[5] || defaultColor
+                        }" (click)="changeColorCell(5)"></td>
+                <td class="activity" [ngStyle]="{
+                            'background-color': currentColorCombination[6] || defaultColor
+                        }" (click)="changeColorCell(6)"></td>
+                <td class="activity" [ngStyle]="{
+                            'background-color': currentColorCombination[7] || defaultColor
+                        }" (click)="changeColorCell(7)"></td>
+            </tr>
+            <tr>
+                <td class="activity" [ngStyle]="{
+                            'background-color': currentColorCombination[8] || defaultColor
+                            }" (click)="changeColorCell(8)"></td>
+                <td class="activity" [ngStyle]="{
+                            'background-color': currentColorCombination[9] || defaultColor
+                        }" (click)="changeColorCell(9)"></td>
+                <td class="activity" [ngStyle]="{
+                            'background-color': currentColorCombination[10] || defaultColor
+                        }" (click)="changeColorCell(10)"></td>
+                <td class="activity" [ngStyle]="{
+                            'background-color': currentColorCombination[11] || defaultColor
+                        }" (click)="changeColorCell(11)"></td>
+            </tr>
+            <tr>
+                <td class="activity" [ngStyle]="{
+                            'background-color': currentColorCombination[12] || defaultColor
+                            }" (click)="changeColorCell(12)"></td>
+                <td class="activity" [ngStyle]="{
+                            'background-color': currentColorCombination[13] || defaultColor
+                        }" (click)="changeColorCell(13)"></td>
+                <td class="activity" [ngStyle]="{
+                            'background-color': currentColorCombination[14] || defaultColor
+                        }" (click)="changeColorCell(14)"></td>
+                <td class="activity" [ngStyle]="{
+                            'background-color': currentColorCombination[15] || defaultColor
+                        }" (click)="changeColorCell(15)"></td>
+            </tr>
+        </table>
+        }
 
         <h1 (click)="checkResult()">Check!</h1>
     </div>
