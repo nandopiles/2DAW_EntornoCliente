@@ -17,6 +17,7 @@ export class GameComponent {
   public defaultColor: string = "#2176FF";
   public timeShuffling: number = 3000;
   public timesFailed: number = 0;
+  public numCols: number = 0;
   public selectedCellIndex: number | null = null;
   public intervalId: any;
   public isGameOver: boolean = false;
@@ -100,10 +101,11 @@ export class GameComponent {
   }
 
   /**
-   * Starts to shuffle the colors ......
+   * Starts to shuffle the colors and generates a winner combination and a random one to start playing.
    * @returns {void}
    */
   public startGame(): void {
+    this.numCols = this.isLevel1 ? 2 : (this.isLevel2 ? 3 : (this.isLevel3 ? 4 : 0)); // depending of the level there will be more rows/columns.
     this.generateCombination(true);
 
     setTimeout(() => {
@@ -120,9 +122,8 @@ export class GameComponent {
       alert("Yee t'has equivocat!!, torna a intentar-ho");
       this.timesFailed++;
 
-      if (this.timesFailed >= 3) {
+      if (this.timesFailed >= 3)
         this.isGameOver = true;
-      }
     } else {
       // correct combination.
       console.log("hell yeah!");
