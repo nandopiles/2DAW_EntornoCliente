@@ -1,3 +1,7 @@
+body {
+    margin: 0;
+}
+
 .operacion {
     font-size: 1.8em;
     vertical-align: middle;

@@ -1,6 +1,6 @@
 <table class="tabla_resultado" cellpadding="0" cellspacing="10">
     <tr>
-        <td style="background-color: azure" class="resultado" colspan="4">0</td>
+        <td style="background-color: azure" class="resultado" colspan="4">{{value}}</td>
     </tr>
     <tr>
         <td><button class="sign"><span class="operacion">1/x</span></button></td>
@@ -10,27 +10,27 @@
         <td><button class="sign"><span class="operacion">&divide;</span></button></td>
     </tr>
     <tr>
-        <td><button (click)="getValue(7)"><span class="operacion">7</span></button>
+        <td><button (click)="getNum(7)"><span class="operacion">7</span></button>
         </td>
-        <td><button (click)="getValue(8)"><span class="operacion">8</span></button></td>
-        <td><button (click)="getValue(9)"><span class="operacion">9</span></button></td>
+        <td><button (click)="getNum(8)"><span class="operacion">8</span></button></td>
+        <td><button (click)="getNum(9)"><span class="operacion">9</span></button></td>
         <td><button class="sign"><span class="operacion">&times;</span></button></td>
     </tr>
     <tr>
-        <td><button (click)="getValue(4)"><span class="operacion">4</span></button></td>
-        <td><button (click)="getValue(5)"><span class="operacion">5</span></button></td>
-        <td><button (click)="getValue(6)"><span class="operacion">6</span></button></td>
+        <td><button (click)="getNum(4)"><span class="operacion">4</span></button></td>
+        <td><button (click)="getNum(5)"><span class="operacion">5</span></button></td>
+        <td><button (click)="getNum(6)"><span class="operacion">6</span></button></td>
         <td><button class="sign"><span class="operacion">-</span></button></td>
     </tr>
     <tr>
-        <td><button (click)="getValue(1)"><span class="operacion">1</span></button></td>
-        <td><button (click)="getValue(2)"><span class="operacion">2</span></button></td>
-        <td><button (click)="getValue(3)"><span class="operacion">3</span></button></td>
-        <td><button class="sign"><span class="operacion">+</span></button></td>
+        <td><button (click)="getNum(1)"><span class="operacion">1</span></button></td>
+        <td><button (click)="getNum(2)"><span class="operacion">2</span></button></td>
+        <td><button (click)="getNum(3)"><span class="operacion">3</span></button></td>
+        <td><button (click)="plus()" class="sign"><span class="operacion">+</span></button></td>
     </tr>
     <tr>
-        <td><button class="sign"><span class="operacion">C</span></button></td>
-        <td><button><span class="operacion">0</span></button></td>
+        <td><button (click)="deleteAll()" class="sign"><span class="operacion">C</span></button></td>
+        <td><button (click)="getNum(0)"><span class="operacion">0</span></button></td>
         <td><button class="sign"><span class="operacion">,</span></button></td>
         <td><button class="sign"><span class="operacion">=</span></button></td>
     </tr>
