@@ -1,5 +1,4 @@
 import { Component } from '@angular/core';
-import { publishReplay } from 'rxjs';
 
 @Component({
   selector: 'app-calculator',
@@ -10,18 +9,40 @@ import { publishReplay } from 'rxjs';
 })
 export class CalculatorComponent {
   public value: string = "0";
+  public operationToDo: string = "";
   public firstNumber: number = 0;
-  public secondNumber: number = 0;
+  public result: number = 0;
   public isPlus: boolean = false;
-  public numbersToPlus: number[] = [];
-
-  // public numbersToOperate: number[] = [];
+  public numbersToOperate: number[] = [];
+  public OPERATIONS: { [key: string]: () => void } = {
+    sum: () => {
+      this.numbersToOperate.forEach(num => {
+        this.result += num;
+      });
+      this.result += Number(this.value);
+      this.value = this.result.toString();
+    },
+    subtract: () => {
+      this.numbersToOperate.forEach(num => {
+        this.result -= num;
+      });
+      this.result -= Number(this.value);
+      this.value = this.result.toString();
+    },
+    multiplication: () => {
+      this.numbersToOperate.forEach(num => {
+        this.result *= num;
+      });
+      this.result *= Number(this.value);
+      this.value = this.result.toString();
+    }
+  };
 
 
 
   /**
    * Gets the value of the num clicked.
-   * @param {number} num
+   * @param {number|string} num
    * @returns {void}
    */
   public getNum(num: number | string): void {
@@ -34,7 +55,15 @@ export class CalculatorComponent {
    * @returns {void}
    */
   public saveNums(): void {
-    this.numbersToPlus.push(Number(this.value));
+    this.numbersToOperate.push(Number(this.value));
+  }
+
+  /**
+   * Resets the number wrote into an empty string to write another number.
+   * @returns {void}
+   */
+  public resetNum(): void {
+    this.value = "";
   }
 
   /**
@@ -44,7 +73,17 @@ export class CalculatorComponent {
   public sum(): void {
     this.saveNums();
     this.resetNum();
-    this.isPlus = true;
+    this.operationToDo = "sum";
+  }
+
+  /**
+   * Saves all the numbers that have to be plus when the user clicks th equal symbol.
+   * @returns {void}
+   */
+  public subtract(): void {
+    this.saveNums();
+    this.resetNum();
+    this.operationToDo = "subtract";
   }
 
   /**
@@ -52,8 +91,9 @@ export class CalculatorComponent {
    * @returns {void}
    */
   public resetOperationVariables(): void {
-    this.isPlus = false;
-    this.numbersToPlus = [];
+    this.numbersToOperate = [];
+    this.operationToDo = "";
+    this.result = 0;
   }
 
   /**
@@ -61,26 +101,8 @@ export class CalculatorComponent {
    * @returns {void}
    */
   public doOperation(): void {
-    if (this.isPlus) {
-      let plusResult: number = 0;
-
-      this.numbersToPlus.forEach(num => {
-        plusResult += num;
-      });
-      plusResult += Number(this.value);
-      this.value = plusResult.toString();
-      this.resetOperationVariables();
-    } else {
-
-    }
-  }
-
-  /**
-   * Resets the number wrote into an empty string to write another number.
-   * @returns {void}
-   */
-  public resetNum(): void {
-    this.value = "";
+    this.OPERATIONS[this.operationToDo]();
+    this.resetOperationVariables();
   }
 
   /**
