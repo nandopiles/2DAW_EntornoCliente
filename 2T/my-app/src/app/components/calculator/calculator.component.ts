@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { publishReplay } from 'rxjs';
 
 @Component({
   selector: 'app-calculator',
@@ -9,8 +10,12 @@ import { Component } from '@angular/core';
 })
 export class CalculatorComponent {
   public value: string = "0";
-  public isOperationOnCourse: boolean = false;
-  // public operationNumbers: number[] = [];
+  public firstNumber: number = 0;
+  public secondNumber: number = 0;
+  public isPlus: boolean = false;
+  public numbersToPlus: number[] = [];
+
+  // public numbersToOperate: number[] = [];
 
 
 
@@ -19,30 +24,63 @@ export class CalculatorComponent {
    * @param {number} num
    * @returns {void}
    */
-  public getNum(num: number): void {
+  public getNum(num: number | string): void {
     const numString: string = num.toString();
     (this.value === "0") ? this.value = numString : this.value += numString;
   }
 
   /**
-   * Does the "plus" operation with the nums selected.
+   * Saves the value of the num wrote into a list of numbers.
    * @returns {void}
    */
-  public plus(): void {
-
-    let numbersToPlus: number[] = [];
-
-    // numbersToPlus = this.getValues(numbersToPlus);
-    console.log(numbersToPlus);
-
+  public saveNums(): void {
+    this.numbersToPlus.push(Number(this.value));
   }
 
   /**
-   * Resets the number wrote into 0 to write another number.
+   * Saves all the numbers that have to be plus when the user clicks th equal symbol.
+   * @returns {void}
+   */
+  public sum(): void {
+    this.saveNums();
+    this.resetNum();
+    this.isPlus = true;
+  }
+
+  /**
+   * Resets all the variables that have been used for doing the operation.
+   * @returns {void}
+   */
+  public resetOperationVariables(): void {
+    this.isPlus = false;
+    this.numbersToPlus = [];
+  }
+
+  /**
+   * Performs the indicated operation.
+   * @returns {void}
+   */
+  public doOperation(): void {
+    if (this.isPlus) {
+      let plusResult: number = 0;
+
+      this.numbersToPlus.forEach(num => {
+        plusResult += num;
+      });
+      plusResult += Number(this.value);
+      this.value = plusResult.toString();
+      this.resetOperationVariables();
+    } else {
+
+    }
+  }
+
+  /**
+   * Resets the number wrote into an empty string to write another number.
    * @returns {void}
    */
   public resetNum(): void {
-    this.value = "0";
+    this.value = "";
   }
 
   /**
@@ -51,5 +89,6 @@ export class CalculatorComponent {
    */
   public deleteAll(): void {
     this.value = "0";
+    this.resetOperationVariables();
   }
 }

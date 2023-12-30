@@ -26,12 +26,12 @@
         <td><button (click)="getNum(1)"><span class="operacion">1</span></button></td>
         <td><button (click)="getNum(2)"><span class="operacion">2</span></button></td>
         <td><button (click)="getNum(3)"><span class="operacion">3</span></button></td>
-        <td><button (click)="plus()" class="sign"><span class="operacion">+</span></button></td>
+        <td><button (click)="sum()" class="sign"><span class="operacion">+</span></button></td>
     </tr>
     <tr>
         <td><button (click)="deleteAll()" class="sign"><span class="operacion">C</span></button></td>
         <td><button (click)="getNum(0)"><span class="operacion">0</span></button></td>
-        <td><button class="sign"><span class="operacion">,</span></button></td>
-        <td><button class="sign"><span class="operacion">=</span></button></td>
+        <td><button (click)="getNum('.')" class="sign"><span class="operacion">,</span></button></td>
+        <td><button (click)="doOperation()" class="sign"><span class="operacion">=</span></button></td>
     </tr>
 </table>
