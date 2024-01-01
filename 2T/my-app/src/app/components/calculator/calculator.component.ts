@@ -23,9 +23,11 @@ export class CalculatorComponent {
       this.value = this.result.toString();
     },
     subtract: () => {
-      this.numbersToOperate.forEach(num => {
-        this.result -= num;
-      });
+      if (this.numbersToOperate.length === 1) {
+        this.result = this.numbersToOperate[0]; 
+      } else if (this.numbersToOperate.length > 1) {
+        this.result = this.numbersToOperate.reduce((accumulator, num) => accumulator - num);
+      }
       this.result -= Number(this.value);
       this.value = this.result.toString();
     },
@@ -51,14 +53,6 @@ export class CalculatorComponent {
   }
 
   /**
-   * Saves the value of the num wrote into a list of numbers.
-   * @returns {void}
-   */
-  public saveNums(): void {
-    this.numbersToOperate.push(Number(this.value));
-  }
-
-  /**
    * Resets the number wrote into an empty string to write another number.
    * @returns {void}
    */
@@ -67,22 +61,29 @@ export class CalculatorComponent {
   }
 
   /**
-   * Saves all the numbers that have to be plus when the user clicks th equal symbol.
+   * Saves the value of the num wrote into a list of numbers.
    * @returns {void}
    */
-  public sum(): void {
-    this.saveNums();
+  public saveNums(): void {
+    this.numbersToOperate.push(Number(this.value));
     this.resetNum();
-    this.operationToDo = "sum";
   }
 
   /**
    * Saves all the numbers that have to be plus when the user clicks th equal symbol.
    * @returns {void}
    */
+  public sum(): void {
+    this.saveNums();
+    this.operationToDo = "sum";
+  }
+
+  /**
+   * Saves all the numbers that have to be subtracted when the user clicks th equal symbol.
+   * @returns {void}
+   */
   public subtract(): void {
     this.saveNums();
-    this.resetNum();
     this.operationToDo = "subtract";
   }
 
