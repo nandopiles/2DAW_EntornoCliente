@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { CalculatorOperations } from './calculator.interface';
 
 @Component({
   selector: 'app-calculator',
@@ -14,7 +15,7 @@ export class CalculatorComponent {
   public result: number = 0;
   public isPlus: boolean = false;
   public numbersToOperate: number[] = [];
-  public OPERATIONS: { [key: string]: () => void } = {
+  public OPERATIONS: CalculatorOperations = {
     sum: () => {
       this.numbersToOperate.forEach(num => {
         this.result += num;
