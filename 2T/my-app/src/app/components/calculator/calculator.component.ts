@@ -24,7 +24,7 @@ export class CalculatorComponent {
     },
     subtract: () => {
       if (this.numbersToOperate.length === 1) {
-        this.result = this.numbersToOperate[0]; 
+        this.result = this.numbersToOperate[0];
       } else if (this.numbersToOperate.length > 1) {
         this.result = this.numbersToOperate.reduce((accumulator, num) => accumulator - num);
       }
@@ -32,6 +32,7 @@ export class CalculatorComponent {
       this.value = this.result.toString();
     },
     multiplication: () => {
+      this.result = 1; // result default value is 0 so it has to be changed to 1 bc if u multiplicate whatever by 0 it's 0.
       this.numbersToOperate.forEach(num => {
         this.result *= num;
       });
@@ -85,6 +86,15 @@ export class CalculatorComponent {
   public subtract(): void {
     this.saveNums();
     this.operationToDo = "subtract";
+  }
+
+  /**
+   * Saves all the numbers that have to be subtracted when the user clicks th equal symbol.
+   * @returns {void}
+   */
+  public multiplication(): void {
+    this.saveNums();
+    this.operationToDo = "multiplication";
   }
 
   /**
