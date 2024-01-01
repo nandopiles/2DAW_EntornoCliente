@@ -39,6 +39,16 @@ export class CalculatorComponent {
       });
       this.result *= Number(this.value);
       this.value = this.result.toString();
+    },
+    factorial: () => {
+      const num = Number(this.value);
+      console.log(num);
+
+      this.result = 1; // result default value is 0 so it has to be changed to 1 bc if u multiplicate whatever by 0 it's 0.
+      for (let i = num; i >= 1; i--) {
+        this.result *= i;
+      }
+      this.value = this.result.toString();
     }
   };
 
@@ -115,6 +125,17 @@ export class CalculatorComponent {
   public doOperation(): void {
     this.OPERATIONS[this.operationToDo]();
     this.resetOperationVariables();
+  }
+
+  /**
+   * Calculates the factorial number.
+   * @returns {void}
+   */
+  public factorial(): void {
+    console.log("factorial");
+
+    this.operationToDo = "factorial";
+    this.doOperation();
   }
 
   /**
