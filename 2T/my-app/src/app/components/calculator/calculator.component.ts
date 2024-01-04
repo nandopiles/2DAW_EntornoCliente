@@ -11,24 +11,32 @@ import { CalculatorOperations } from './calculator.interface';
 export class CalculatorComponent {
   public value: string = "0";
   public operationToDo: string = "";
-
   public firstNumber: number | null = null;
   public secondNumber: number | null = null;
-
   public result: number = 0;
-  public isPlus: boolean = false;
-  public numbersToOperate: number[] = [];
+
   public operationsLibrary: CalculatorOperations = {
     sum: () => {
       if (this.firstNumber !== null && this.secondNumber !== null) {
-        console.log("Bo");
-        this.sum()
+        this.performOperation(this.operationToDo);
       } else if (this.firstNumber !== null && this.secondNumber === null) {
         this.secondNumber = Number(this.value);
         this.result = Number(this.firstNumber) + Number(this.secondNumber);
         this.value = this.result.toString();
       }
-    }
+    },
+    subtract: () => {
+      if (this.firstNumber !== null && this.secondNumber !== null) {
+        this.performOperation(this.operationToDo);
+      } else if (this.firstNumber !== null && this.secondNumber === null) {
+        this.secondNumber = Number(this.value);
+        this.result = Number(this.firstNumber) - Number(this.secondNumber);
+        this.value = this.result.toString();
+      }
+    },
+    /* multiplication: () => {
+
+    } */
   };
 
 
@@ -52,28 +60,25 @@ export class CalculatorComponent {
   }
 
   /**
-   * Saves the value of the num wrote into a list of numbers.
+   * Performs the specified operation using the current numbers and updates the result.
+   * @param {string} operator - The operation to perform ("sum" or "subtract").
    * @returns {void}
    */
-  public saveNums(): void {
-    this.numbersToOperate.push(Number(this.value));
-    this.resetNum();
-  }
-
-  /**
-   * Sums the first num with the second one.
-   * @returns {void}
-   */
-  public sum(): void {
-    this.operationToDo = "sum";
+  public performOperation(operator: string): void {
+    this.operationToDo = operator;
 
     if (this.firstNumber === null) {
       this.firstNumber = Number(this.value);
       this.resetNum();
     } else {
       this.secondNumber = Number(this.value);
-      this.result = Number(this.firstNumber) + Number(this.secondNumber);
+      if (operator === "sum") {
+        this.result = Number(this.firstNumber) + Number(this.secondNumber);
+      } else if (operator === "subtract") {
+        this.result = Number(this.firstNumber) - Number(this.secondNumber);
+      }
       this.value = this.result.toString();
+      
       this.resetNum();
       this.firstNumber = this.result;
       this.secondNumber = null;
@@ -82,20 +87,10 @@ export class CalculatorComponent {
   }
 
   /**
-   * Saves all the numbers that have to be subtracted when the user clicks th equal symbol.
-   * @returns {void}
-   */
-  public subtract(): void {
-    this.saveNums();
-    this.operationToDo = "subtract";
-  }
-
-  /**
-   * Saves all the numbers that have to be subtracted when the user clicks th equal symbol.
+   *! Saves all the numbers that have to be subtracted when the user clicks th equal symbol.
    * @returns {void}
    */
   public multiplication(): void {
-    this.saveNums();
     this.operationToDo = "multiplication";
   }
 
