@@ -11,44 +11,23 @@ import { CalculatorOperations } from './calculator.interface';
 export class CalculatorComponent {
   public value: string = "0";
   public operationToDo: string = "";
-  public firstNumber: number = 0;
+
+  public firstNumber: number | null = null;
+  public secondNumber: number | null = null;
+
   public result: number = 0;
   public isPlus: boolean = false;
   public numbersToOperate: number[] = [];
-  public OPERATIONS: CalculatorOperations = {
+  public operationsLibrary: CalculatorOperations = {
     sum: () => {
-      this.numbersToOperate.forEach(num => {
-        this.result += num;
-      });
-      this.result += Number(this.value);
-      this.value = this.result.toString();
-    },
-    subtract: () => {
-      if (this.numbersToOperate.length === 1) {
-        this.result = this.numbersToOperate[0];
-      } else if (this.numbersToOperate.length > 1) {
-        this.result = this.numbersToOperate.reduce((accumulator, num) => accumulator - num);
+      if (this.firstNumber !== null && this.secondNumber !== null) {
+        console.log("Bo");
+        this.sum()
+      } else if (this.firstNumber !== null && this.secondNumber === null) {
+        this.secondNumber = Number(this.value);
+        this.result = Number(this.firstNumber) + Number(this.secondNumber);
+        this.value = this.result.toString();
       }
-      this.result -= Number(this.value);
-      this.value = this.result.toString();
-    },
-    multiplication: () => {
-      this.result = 1; // result default value is 0 so it has to be changed to 1 bc if u multiplicate whatever by 0 it's 0.
-      this.numbersToOperate.forEach(num => {
-        this.result *= num;
-      });
-      this.result *= Number(this.value);
-      this.value = this.result.toString();
-    },
-    factorial: () => {
-      const num = Number(this.value);
-      console.log(num);
-
-      this.result = 1; // result default value is 0 so it has to be changed to 1 bc if u multiplicate whatever by 0 it's 0.
-      for (let i = num; i >= 1; i--) {
-        this.result *= i;
-      }
-      this.value = this.result.toString();
     }
   };
 
@@ -82,12 +61,24 @@ export class CalculatorComponent {
   }
 
   /**
-   * Saves all the numbers that have to be plus when the user clicks th equal symbol.
+   * Sums the first num with the second one.
    * @returns {void}
    */
   public sum(): void {
-    this.saveNums();
     this.operationToDo = "sum";
+
+    if (this.firstNumber === null) {
+      this.firstNumber = Number(this.value);
+      this.resetNum();
+    } else {
+      this.secondNumber = Number(this.value);
+      this.result = Number(this.firstNumber) + Number(this.secondNumber);
+      this.value = this.result.toString();
+      this.resetNum();
+      this.firstNumber = this.result;
+      this.secondNumber = null;
+      this.result = 0;
+    }
   }
 
   /**
@@ -113,9 +104,10 @@ export class CalculatorComponent {
    * @returns {void}
    */
   public resetOperationVariables(): void {
-    this.numbersToOperate = [];
     this.operationToDo = "";
     this.result = 0;
+    this.firstNumber = null;
+    this.secondNumber = null;
   }
 
   /**
@@ -123,7 +115,7 @@ export class CalculatorComponent {
    * @returns {void}
    */
   public doOperation(): void {
-    this.OPERATIONS[this.operationToDo]();
+    this.operationsLibrary[this.operationToDo]();
     this.resetOperationVariables();
   }
 
