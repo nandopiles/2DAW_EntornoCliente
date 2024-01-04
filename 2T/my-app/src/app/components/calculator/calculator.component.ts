@@ -86,7 +86,7 @@ export class CalculatorComponent {
       } else if (operator === "subtract") {
         this.result = Number(this.firstNumber) - Number(this.secondNumber);
       }
-      this.value = this.result.toString();
+      this.result = Math.round(this.result * 100) / 100; // rounds to 2 decimals if there are.
 
       this.resetNum();
       this.firstNumber = this.result;
