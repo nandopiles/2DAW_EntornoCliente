@@ -5,7 +5,7 @@
     <tr>
         <td><button class="sign"><span class="operacion">1/x</span></button></td>
         <td><button (click)="factorial()" class="sign"><span class="operacion">!</span></button></td>
-        <td><button class="sign"><span class="operacion">&radic;<span
+        <td><button (click)="square()" class="sign"><span class="operacion">&radic;<span
                         style="text-decoration:overline;">&nbsp;x&nbsp;</span></span></button></td>
         <td><button class="sign"><span class="operacion">&divide;</span></button></td>
     </tr>
@@ -14,7 +14,8 @@
         </td>
         <td><button (click)="getNum(8)"><span class="operacion">8</span></button></td>
         <td><button (click)="getNum(9)"><span class="operacion">9</span></button></td>
-        <td><button (click)="multiplication()" class="sign"><span class="operacion">&times;</span></button></td>
+        <td><button (click)="performOperation('multiplication')" class="sign"><span
+                    class="operacion">&times;</span></button></td>
     </tr>
     <tr>
         <td><button (click)="getNum(4)"><span class="operacion">4</span></button></td>

@@ -35,7 +35,13 @@ export class CalculatorComponent {
       }
     },
     multiplication: () => {
-
+      if (this.firstNumber !== null && this.secondNumber !== null) {
+        this.performOperation(this.operationToDo);
+      } else if (this.firstNumber !== null && this.secondNumber === null) {
+        this.secondNumber = Number(this.value);
+        this.result = Number(this.firstNumber) * Number(this.secondNumber);
+        this.value = this.result.toString();
+      }
     },
     factorial: () => {
       const num = Number(this.value);
@@ -45,6 +51,12 @@ export class CalculatorComponent {
         this.result *= i;
       }
       this.value = this.result.toString();
+    },
+    square: () => {
+      const num = Number(this.value);
+      const result: number = Math.sqrt(num);
+
+      this.value = result.toString();
     }
   };
 
@@ -85,6 +97,8 @@ export class CalculatorComponent {
         this.result = Number(this.firstNumber) + Number(this.secondNumber);
       } else if (operator === "subtract") {
         this.result = Number(this.firstNumber) - Number(this.secondNumber);
+      } else if (operator === "multiplication") {
+        this.result = Number(this.firstNumber) * Number(this.secondNumber);
       }
       this.result = Math.round(this.result * 100) / 100; // rounds to 2 decimals if there are.
 
@@ -96,7 +110,7 @@ export class CalculatorComponent {
   }
 
   /**
-   *! Saves all the numbers that have to be subtracted when the user clicks th equal symbol.
+   * Saves all the numbers that have to be subtracted when the user clicks th equal symbol.
    * @returns {void}
    */
   public multiplication(): void {
@@ -129,6 +143,15 @@ export class CalculatorComponent {
    */
   public factorial(): void {
     this.operationToDo = "factorial";
+    this.doOperation();
+  }
+
+  /**
+   * Calculates de square root of a number.
+   * @returns {void}
+   */
+  public square(): void {
+    this.operationToDo = "square";
     this.doOperation();
   }
 
