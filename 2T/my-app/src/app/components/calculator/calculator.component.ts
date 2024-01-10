@@ -57,6 +57,15 @@ export class CalculatorComponent {
       const result: number = Math.sqrt(num);
 
       this.value = result.toString();
+    },
+    division: () => {
+      if (this.firstNumber !== null && this.secondNumber !== null) {
+        this.performOperation(this.operationToDo);
+      } else if (this.firstNumber !== null && this.secondNumber === null) {
+        this.secondNumber = Number(this.value);
+        this.result = Number(this.firstNumber) / Number(this.secondNumber);
+        this.value = this.result.toString();
+      }
     }
   };
 
@@ -82,7 +91,7 @@ export class CalculatorComponent {
 
   /**
    * Performs the specified operation using the current numbers and updates the result.
-   * @param {string} operator - The operation to perform ("sum" or "subtract").
+   * @param {string} operator - The operation to perform ("sum", "subtract", "multiplication" and division).
    * @returns {void}
    */
   public performOperation(operator: string): void {
@@ -99,6 +108,8 @@ export class CalculatorComponent {
         this.result = Number(this.firstNumber) - Number(this.secondNumber);
       } else if (operator === "multiplication") {
         this.result = Number(this.firstNumber) * Number(this.secondNumber);
+      } else if (operator === "division") {
+        this.result = Number(this.firstNumber) / Number(this.secondNumber);
       }
       this.result = Math.round(this.result * 100) / 100; // rounds to 2 decimals if there are.
 
@@ -107,14 +118,6 @@ export class CalculatorComponent {
       this.secondNumber = null;
       this.result = 0;
     }
-  }
-
-  /**
-   * Saves all the numbers that have to be subtracted when the user clicks th equal symbol.
-   * @returns {void}
-   */
-  public multiplication(): void {
-    this.operationToDo = "multiplication";
   }
 
   /**
@@ -152,6 +155,15 @@ export class CalculatorComponent {
    */
   public square(): void {
     this.operationToDo = "square";
+    this.doOperation();
+  }
+
+  /**
+   * Calculates de division of 2 numbers.
+   * @returns {void}
+   */
+  public division(): void {
+    this.operationToDo = "division";
     this.doOperation();
   }
 
