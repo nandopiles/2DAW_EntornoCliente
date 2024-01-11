@@ -1,0 +1,14 @@
+<!-- Vegetables -->
+
+<main class="content">
+    <section>
+        <div class="grid">
+            @for (vegetable of vegetablesGrid; track $index) {
+            <app-vegetables-card [vegetable]="vegetable"></app-vegetables-card>
+            }
+        </div>
+    </section>
+</main>
+
+<!-- Continue implementing it -->
+<app-modal [modalClass]="" [img]="" [name]=""></app-modal>

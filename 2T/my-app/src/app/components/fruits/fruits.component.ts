@@ -10,11 +10,6 @@ import { FruitsInfo } from './fruits.interface';
   styleUrl: './fruits.component.css'
 })
 export class FruitsComponent {
-  /* public fruitsGrid: string[][] = [
-    ['Plátanos', 'Kiwis'],
-    ['Manzanas', 'Peras']
-  ] */
-
   public fruitsGrid: FruitsInfo[][] = [
     [
       {
