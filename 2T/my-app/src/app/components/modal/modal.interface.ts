@@ -1,4 +1,4 @@
 export interface ModalInfo {
-    name: string;
+    title: string;
     img: string;
 }

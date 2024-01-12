@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { VegetablesInfo } from './vegetables.interface';
 import { VegetablesCardComponent } from '../vegetables-card/vegetables-card.component';
 import { ModalComponent } from '../modal/modal.component';
+import { ModalInfo } from '../modal/modal.interface';
 
 @Component({
   selector: 'app-vegetables',
@@ -35,4 +36,26 @@ export class VegetablesComponent {
       img: 'https://imagenes.20minutos.es/files/image_1920_1080/uploads/imagenes/2023/10/02/morada-blanca-charlota-para-que-se-utiliza-cada-tipo-de-cebolla.jpeg'
     }
   ]
+  public modalInfo: ModalInfo = {
+    title: '',
+    img: ''
+  }
+  public isModalReadyToBeVisible: boolean = false;
+
+
+
+  /**
+   * Fills the info of the modal received from the Card component.
+   * @param {ModalInfo} modalInfo
+   * @returns {void}
+   */
+  public fillInfoModal(modalInfo: ModalInfo): void {
+    this.modalInfo = modalInfo;
+    this.isModalReadyToBeVisible = true;
+  }
+
+  public handleModalClosed(isModalReadyToPopUp: boolean): void {
+    this.isModalReadyToBeVisible = isModalReadyToPopUp;
+  }
+
 }

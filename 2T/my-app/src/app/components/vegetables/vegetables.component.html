@@ -4,11 +4,11 @@
     <section>
         <div class="grid">
             @for (vegetable of vegetablesGrid; track $index) {
-            <app-vegetables-card [vegetable]="vegetable"></app-vegetables-card>
+            <app-vegetables-card [vegetable]="vegetable" (modalInfo)="fillInfoModal($event)"></app-vegetables-card>
             }
         </div>
     </section>
 </main>
 
-<!-- Continue implementing it -->
-<app-modal [modalClass]="" [img]="" [name]=""></app-modal>
+<app-modal [modalProperties]="modalInfo" [isModalReadyToPopUp]="isModalReadyToBeVisible"
+    (isModalClosed)="handleModalClosed($event)"></app-modal>

@@ -1,7 +1,7 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { VegetablesInfo } from '../vegetables/vegetables.interface';
 import { NgStyle } from '@angular/common';
-import { ModalInfo } from './vegetable-card.interface';
+import { ModalInfo } from '../modal/modal.interface';
 
 @Component({
   selector: 'app-vegetables-card',
@@ -22,13 +22,14 @@ export class VegetablesCardComponent {
 
   /**
    * Emits an event passing the info of the vegetable selected.
+   * @param {VegetablesInfo} vegetableSelected
    * @returns {void}
    */
-  public displayModal(): void {
+  public displayModal(vegetableSelected: VegetablesInfo): void {
     this.modalInfo.emit(
       {
-        name: this.vegetable.name,
-        img: this.vegetable.img
+        title: vegetableSelected.name,
+        img: vegetableSelected.img
       }
     );
   }
