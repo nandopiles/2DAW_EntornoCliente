@@ -3,13 +3,13 @@ import { FruitsInfo } from '../fruits/fruits.interface';
 import { NgStyle } from '@angular/common';
 
 @Component({
-  selector: 'app-fruits-card',
+  selector: 'app-card',
   standalone: true,
   imports: [NgStyle],
-  templateUrl: './fruits-card.component.html',
-  styleUrl: './fruits-card.component.css'
+  templateUrl: './card.component.html',
+  styleUrl: './card.component.css'
 })
-export class FruitsCardComponent {
+export class CardComponent {
   @Input() fruit: FruitsInfo = {
     name: '',
     img: ''

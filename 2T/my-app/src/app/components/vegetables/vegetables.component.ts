@@ -1,13 +1,13 @@
 import { Component } from '@angular/core';
 import { VegetablesInfo } from './vegetables.interface';
-import { VegetablesCardComponent } from '../vegetables-card/vegetables-card.component';
+import { Article } from '../article/article.component';
 import { ModalComponent } from '../modal/modal.component';
 import { ModalInfo } from '../modal/modal.interface';
 
 @Component({
   selector: 'app-vegetables',
   standalone: true,
-  imports: [VegetablesCardComponent, ModalComponent],
+  imports: [Article, ModalComponent],
   templateUrl: './vegetables.component.html',
   styleUrl: './vegetables.component.css'
 })

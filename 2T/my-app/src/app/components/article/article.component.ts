@@ -4,13 +4,13 @@ import { NgStyle } from '@angular/common';
 import { ModalInfo } from '../modal/modal.interface';
 
 @Component({
-  selector: 'app-vegetables-card',
+  selector: 'app-article',
   standalone: true,
   imports: [NgStyle],
-  templateUrl: './vegetables-card.component.html',
-  styleUrl: './vegetables-card.component.css'
+  templateUrl: './article.component.html',
+  styleUrl: './article.component.css'
 })
-export class VegetablesCardComponent {
+export class Article {
   @Output() modalInfo = new EventEmitter<ModalInfo>();
   @Input() vegetable: VegetablesInfo = {
     name: '',

@@ -4,7 +4,7 @@
     <section>
         <div class="grid">
             @for (vegetable of vegetablesGrid; track $index) {
-            <app-vegetables-card [vegetable]="vegetable" (modalInfo)="fillInfoModal($event)"></app-vegetables-card>
+            <app-article [vegetable]="vegetable" (modalInfo)="fillInfoModal($event)"></app-article>
             }
         </div>
     </section>

@@ -1,11 +1,11 @@
 import { Component } from '@angular/core';
-import { FruitsCardComponent } from '../fruits-card/fruits-card.component';
+import { CardComponent } from '../card/card.component';
 import { FruitsInfo } from './fruits.interface';
 
 @Component({
   selector: 'app-fruits',
   standalone: true,
-  imports: [FruitsCardComponent],
+  imports: [CardComponent],
   templateUrl: './fruits.component.html',
   styleUrl: './fruits.component.css'
 })
