@@ -1,11 +1,11 @@
 import { Component } from '@angular/core';
-import { ObjectInfo } from '../vegetables/object.interface';
-import { Article } from '../article/article.component';
+import { ObjectInfo } from '../fruits/object.interface';
+import { CardComponent } from '../card/card.component';
 
 @Component({
   selector: 'app-fishes',
   standalone: true,
-  imports: [Article],
+  imports: [CardComponent],
   templateUrl: './fishes.component.html',
   styleUrl: './fishes.component.css'
 })
@@ -42,5 +42,6 @@ export class FishesComponent {
       text: 'Pez de San Pedro',
       img: 'https://e00-expansion.uecdn.es/assets/multimedia/imagenes/2017/10/19/15084107498663.jpg'
     }
-  ]
+  ];
+  public isPostHidden: boolean = true;
 }

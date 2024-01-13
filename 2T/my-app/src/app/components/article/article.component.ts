@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
-import { ObjectInfo } from '../vegetables/object.interface';
+import { ObjectInfo } from '../fruits/object.interface';
 import { NgStyle } from '@angular/common';
 import { ModalInfo } from '../modal/modal.interface';
 

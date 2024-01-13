@@ -1,27 +1,19 @@
 <!-- Pescados -->
-<!-- Fotos para pescados:
-          'https://e00-expansion.uecdn.es/assets/multimedia/imagenes/2017/10/19/15084107521488.jpg'
-          'https://e00-expansion.uecdn.es/assets/multimedia/imagenes/2017/10/19/15084107530435.jpg'
-          'https://e00-expansion.uecdn.es/assets/multimedia/imagenes/2017/10/19/15084107493872.jpg'
-          'https://e00-expansion.uecdn.es/assets/multimedia/imagenes/2017/10/19/15084107503223.jpg'
-          'https://e00-expansion.uecdn.es/assets/multimedia/imagenes/2017/10/19/15084107517092.jpg'
-          'https://e00-expansion.uecdn.es/assets/multimedia/imagenes/2017/10/19/15084107498663.jpg'
-    -->
 
 <section>
-    <!-- Componente Post-->
-    <!-- <div class="grid">
-        <div class="card">
+    <!-- Post Component -->
+    <div class="grid">
+        <div class="card" [hidden]="isPostHidden">
             <div class="photo">
                 <div class="title">Rodaballo</div>
             </div>
         </div>
-    </div> -->
+    </div>
 
     <div class="grid">
-        <!-- Componente Article-->
+        <!-- Card Component -->
         @for (fish of fishesGrid; track $index) {
-        <app-article [object]="fish"></app-article>
+        <app-card [object]="fish"></app-card>
         }
 
     </div>

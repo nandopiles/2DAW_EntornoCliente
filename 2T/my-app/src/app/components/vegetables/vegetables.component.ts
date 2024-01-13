@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { ObjectInfo } from './object.interface';
+import { ObjectInfo } from '../fruits/object.interface';
 import { Article } from '../article/article.component';
 import { ModalComponent } from '../modal/modal.component';
 import { ModalInfo } from '../modal/modal.interface';

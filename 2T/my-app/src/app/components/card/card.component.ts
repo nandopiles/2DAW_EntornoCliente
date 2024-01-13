@@ -1,6 +1,6 @@
 import { Component, Input } from '@angular/core';
-import { FruitsInfo } from '../fruits/fruits.interface';
 import { NgStyle } from '@angular/common';
+import { ObjectInfo } from '../fruits/object.interface';
 
 @Component({
   selector: 'app-card',
@@ -10,7 +10,7 @@ import { NgStyle } from '@angular/common';
   styleUrl: './card.component.css'
 })
 export class CardComponent {
-  @Input() fruit: FruitsInfo = {
+  @Input() object: ObjectInfo = {
     name: '',
     img: ''
   };

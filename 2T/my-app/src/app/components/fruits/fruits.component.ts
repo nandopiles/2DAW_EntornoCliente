@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { CardComponent } from '../card/card.component';
-import { FruitsInfo } from './fruits.interface';
+import { ObjectInfo } from './object.interface';
 
 @Component({
   selector: 'app-fruits',
@@ -10,7 +10,7 @@ import { FruitsInfo } from './fruits.interface';
   styleUrl: './fruits.component.css'
 })
 export class FruitsComponent {
-  public fruitsGrid: FruitsInfo[][] = [
+  public fruitsGrid: ObjectInfo[][] = [
     [
       {
         name: 'Plátanos',
