@@ -18,6 +18,10 @@ export class PostComponent {
 
 
 
+  /**
+   * Sends the info of the object selected to the parent.
+   * @returns {void}
+   */
   public showSpecificObject(): void {
     this.objectInfo.emit(this.object);
   }

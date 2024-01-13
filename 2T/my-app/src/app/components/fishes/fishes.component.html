@@ -1,15 +1,20 @@
 <!-- Fishes -->
 
 <section>
-    <!-- Article Component -->
     <div class="grid">
-        <app-article [object]="fishSelectedForArticle" [hidden]="isPostHidden"></app-article>
+        <!-- Article Component -->
+        <app-article [object]="fishSelectedForArticle" (modalInfo)="fillInfoModal($event)"
+            [hidden]="isSpecificFishHidden"></app-article>
     </div>
 
     <div class="grid">
         <!-- Post Component -->
         @for (fish of fishesGrid; track $index) {
-        <app-post [object]="fish" (objectInfo)="showFishArticle($event)" [hidden]="!isPostHidden"></app-post>
+        <app-post [object]="fish" (objectInfo)="showFishArticle($event)" [hidden]="!isSpecificFishHidden"></app-post>
         }
     </div>
+
+    <!-- Modal Component -->
+    <app-modal [modalProperties]="modalInfo" [isModalReadyToPopUp]="isModalReadyToBeVisible"
+        (isModalClosed)="handleModalToClose($event)"></app-modal>
 </section>

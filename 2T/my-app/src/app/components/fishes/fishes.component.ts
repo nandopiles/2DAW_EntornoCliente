@@ -3,11 +3,13 @@ import { ObjectInfo } from '../fruits/object.interface';
 import { PostComponent } from '../post/post.component';
 import { CardComponent } from '../card/card.component';
 import { Article } from '../article/article.component';
+import { ModalComponent } from '../modal/modal.component';
+import { ModalInfo } from '../modal/modal.interface';
 
 @Component({
   selector: 'app-fishes',
   standalone: true,
-  imports: [PostComponent, Article],
+  imports: [PostComponent, Article, ModalComponent],
   templateUrl: './fishes.component.html',
   styleUrl: './fishes.component.css'
 })
@@ -50,12 +52,42 @@ export class FishesComponent {
     text: '',
     img: ''
   }
-  public isPostHidden: boolean = true;
+  public modalInfo: ModalInfo = {
+    title: '',
+    img: ''
+  }
+  public isSpecificFishHidden: boolean = true;
+  public isModalReadyToBeVisible: boolean = false;
 
 
 
+  /**
+   * Displays the info of the Fish selected and hides the list of all the fishes.
+   * @param {ObjectInfo} fishSelected
+   * @returns {void}
+   */
   public showFishArticle(fishSelected: ObjectInfo): void {
     this.fishSelectedForArticle = fishSelected;
-    this.isPostHidden = !this.isPostHidden;
+    this.isSpecificFishHidden = !this.isSpecificFishHidden;
+  }
+
+  /**
+   * Fills the info of the modal received from the Card component.
+   * @param {ModalInfo} modalInfo
+   * @returns {void}
+   */
+  public fillInfoModal(modalInfo: ModalInfo): void {
+    this.modalInfo = modalInfo;
+    this.isModalReadyToBeVisible = true;
+  }
+
+  /**
+   * Handles if the modal has to be popped up or closed.
+   * @param {boolean} isModalReadyToPopUp
+   * @returns {void}
+   */
+  public handleModalToClose(isModalReadyToPopUp: boolean): void {
+    this.isModalReadyToBeVisible = isModalReadyToPopUp;
+    this.isSpecificFishHidden = true;
   }
 }

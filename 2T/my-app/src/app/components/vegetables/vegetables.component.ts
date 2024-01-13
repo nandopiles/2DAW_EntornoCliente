@@ -54,7 +54,12 @@ export class VegetablesComponent {
     this.isModalReadyToBeVisible = true;
   }
 
-  public handleModalClosed(isModalReadyToPopUp: boolean): void {
+  /**
+   * Handles if the modal has to be popped up or closed.
+   * @param {boolean} isModalReadyToPopUp
+   * @returns {void}
+   */
+  public handleModal(isModalReadyToPopUp: boolean): void {
     this.isModalReadyToBeVisible = isModalReadyToPopUp;
   }
 
