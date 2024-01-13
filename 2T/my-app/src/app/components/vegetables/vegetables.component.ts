@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { VegetablesInfo } from './vegetables.interface';
+import { ObjectInfo } from './object.interface';
 import { Article } from '../article/article.component';
 import { ModalComponent } from '../modal/modal.component';
 import { ModalInfo } from '../modal/modal.interface';
@@ -12,7 +12,7 @@ import { ModalInfo } from '../modal/modal.interface';
   styleUrl: './vegetables.component.css'
 })
 export class VegetablesComponent {
-  public vegetablesGrid: VegetablesInfo[] = [
+  public vegetablesGrid: ObjectInfo[] = [
     {
       name: 'Lechuga',
       text: 'Lechugas frescas del día',

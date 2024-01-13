@@ -1,14 +1,12 @@
 <!-- Fruits -->
 
-<main class="content">
-    <section>
-        @for (grid of fruitsGrid; track $index) {
-        <div class="grid">
+<section>
+    @for (grid of fruitsGrid; track $index) {
+    <div class="grid">
 
-            @for (fruit of grid; track $index) {
-            <app-card [fruit]="fruit"></app-card>
-            }
-        </div>
+        @for (fruit of grid; track $index) {
+        <app-card [fruit]="fruit"></app-card>
         }
-    </section>
-</main>
+    </div>
+    }
+</section>

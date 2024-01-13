@@ -1,14 +1,12 @@
 <!-- Vegetables -->
 
-<main class="content">
-    <section>
-        <div class="grid">
-            @for (vegetable of vegetablesGrid; track $index) {
-            <app-article [vegetable]="vegetable" (modalInfo)="fillInfoModal($event)"></app-article>
-            }
-        </div>
-    </section>
-</main>
+<section>
+    <div class="grid">
+        @for (vegetable of vegetablesGrid; track $index) {
+        <app-article [object]="vegetable" (modalInfo)="fillInfoModal($event)"></app-article>
+        }
+    </div>
+</section>
 
 <app-modal [modalProperties]="modalInfo" [isModalReadyToPopUp]="isModalReadyToBeVisible"
     (isModalClosed)="handleModalClosed($event)"></app-modal>
