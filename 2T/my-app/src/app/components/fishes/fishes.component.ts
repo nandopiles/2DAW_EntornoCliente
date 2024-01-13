@@ -1,11 +1,13 @@
 import { Component } from '@angular/core';
 import { ObjectInfo } from '../fruits/object.interface';
+import { PostComponent } from '../post/post.component';
 import { CardComponent } from '../card/card.component';
+import { Article } from '../article/article.component';
 
 @Component({
   selector: 'app-fishes',
   standalone: true,
-  imports: [CardComponent],
+  imports: [PostComponent, Article],
   templateUrl: './fishes.component.html',
   styleUrl: './fishes.component.css'
 })
@@ -43,5 +45,17 @@ export class FishesComponent {
       img: 'https://e00-expansion.uecdn.es/assets/multimedia/imagenes/2017/10/19/15084107498663.jpg'
     }
   ];
+  public fishSelectedForArticle: ObjectInfo = {
+    name: '',
+    text: '',
+    img: ''
+  }
   public isPostHidden: boolean = true;
+
+
+
+  public showFishArticle(fishSelected: ObjectInfo): void {
+    this.fishSelectedForArticle = fishSelected;
+    this.isPostHidden = !this.isPostHidden;
+  }
 }

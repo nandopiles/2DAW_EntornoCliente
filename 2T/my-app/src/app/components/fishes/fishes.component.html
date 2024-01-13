@@ -1,21 +1,15 @@
-<!-- Pescados -->
+<!-- Fishes -->
 
 <section>
-    <!-- Post Component -->
+    <!-- Article Component -->
     <div class="grid">
-        <div class="card" [hidden]="isPostHidden">
-            <div class="photo">
-                <div class="title">Rodaballo</div>
-            </div>
-        </div>
+        <app-article [object]="fishSelectedForArticle" [hidden]="isPostHidden"></app-article>
     </div>
 
     <div class="grid">
-        <!-- Card Component -->
+        <!-- Post Component -->
         @for (fish of fishesGrid; track $index) {
-        <app-card [object]="fish"></app-card>
+        <app-post [object]="fish" (objectInfo)="showFishArticle($event)" [hidden]="!isPostHidden"></app-post>
         }
-
     </div>
-
 </section>
