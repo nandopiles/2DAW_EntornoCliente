@@ -41,27 +41,27 @@ export class GameComponent {
    * @returns {void}
    */
   public shuffleColors(isWinnerCombination: boolean): void {
-    let generatedCombination: string[] = [];
+    let generatedRandomCombination: string[] = [];
 
     if (this.isLevel1) {
-      generatedCombination = [...this.colorsLevel1]; // creates a copy of the colors array to not changing it the original one.
+      generatedRandomCombination = [...this.colorsLevel1]; // creates a copy of the colors array to not changing it the original one.
     } else if (this.isLevel2) {
-      generatedCombination = [...this.colorsLevel2];
+      generatedRandomCombination = [...this.colorsLevel2];
     } else if (this.isLevel3) {
-      generatedCombination = [...this.colorsLevel3];
+      generatedRandomCombination = [...this.colorsLevel3];
     }
 
     // Fisher-Yates algorithm to shuffle
-    for (let i = generatedCombination.length - 1; i > 0; i--) {
+    for (let i = generatedRandomCombination.length - 1; i > 0; i--) {
       const j = Math.floor(Math.random() * (i + 1));
-      [generatedCombination[i], generatedCombination[j]] = [generatedCombination[j], generatedCombination[i]];
+      [generatedRandomCombination[i], generatedRandomCombination[j]] = [generatedRandomCombination[j], generatedRandomCombination[i]];
     }
 
     if (isWinnerCombination) {
-      this.currentColorCombination = generatedCombination;
-      this.winnerCombination = generatedCombination;
+      this.currentColorCombination = generatedRandomCombination;
+      this.winnerCombination = generatedRandomCombination;
     } else {
-      this.currentColorCombination = generatedCombination;
+      this.currentColorCombination = generatedRandomCombination;
     }
   }
 
@@ -76,7 +76,6 @@ export class GameComponent {
 
     setTimeout(() => {
       this.stopShuffling();
-      if (isWinnerCombination) console.log(this.winnerCombination);
     }, this.timeShuffling);
   }
 
@@ -94,7 +93,7 @@ export class GameComponent {
       // swap colors
       [this.currentColorCombination[this.selectedCellIndex], this.currentColorCombination[index]] = [
         this.currentColorCombination[index],
-        this.currentColorCombination[this.selectedCellIndex],
+        this.currentColorCombination[this.selectedCellIndex]
       ];
       this.selectedCellIndex = null; // another time to null to reset the index of the cell clicked.
     }
