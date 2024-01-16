@@ -1,0 +1,6 @@
+<div [ngClass]="isModalReadyToPopUp ? 'modal show-modal' : 'modal'" class="modal">
+    <div class="modal-content" [ngStyle]="{'background-image': 'url(' + modalProperties.img + ')'}">
+        <span class="close-button" (click)="closeModal()">x</span>
+        <h1>{{modalProperties.title}}</h1>
+    </div>
+</div>

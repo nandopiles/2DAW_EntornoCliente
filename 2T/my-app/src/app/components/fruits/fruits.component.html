@@ -1,0 +1,13 @@
+<!-- Fruits -->
+
+<section>
+    @for (grid of fruitsGrid; track $index) {
+    <div class="grid">
+
+        @for (fruit of grid; track $index) {
+        <!-- Card Component -->
+        <app-card [object]="fruit"></app-card>
+        }
+    </div>
+    }
+</section>
