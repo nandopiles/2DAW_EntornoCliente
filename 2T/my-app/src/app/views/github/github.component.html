@@ -1,1 +1,17 @@
-<p>github works!</p>
+<div class="github">
+    <div class="menu">
+        <h2>Menu</h2>
+        <nav>
+            <ul>
+                <li><a (click)="getGithubUserInfo()">Ver perfiles</a></li>
+            </ul>
+        </nav>
+    </div>
+
+    <article>
+        @for (user of githubUsers; track $index) {
+        <img src={{user.avatarUrl}} alt="Avatar img of the user: {{user.username}}">
+        <h1>{{user.username}}</h1>
+        }
+    </article>
+</div>

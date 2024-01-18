@@ -1,1 +1,18 @@
-<p>github-two works!</p>
+<div class="github">
+    <div class="menu">
+        <h2>Menu</h2>
+        <nav>
+            <ul>
+                <li><a (click)="getGithubAngularUserInfo()">Show profiles</a></li>
+            </ul>
+        </nav>
+    </div>
+    <article>
+        @for (user of githubAngularUsers; track $index) {
+        <img src={{user.avatarUrl}} alt="Avatar img of the user: {{user.username}}">
+        <h1>{{user.username}}</h1>
+        }
+    </article>
+</div>
+
+<app-modal></app-modal>
