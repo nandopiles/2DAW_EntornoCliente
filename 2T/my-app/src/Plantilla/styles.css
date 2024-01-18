@@ -17,13 +17,13 @@ body {
 
 .github {
     width: 800px;
-    margin:auto;
-    background-color:#FFF;
-    padding:20px;
+    margin: auto;
+    background-color: #FFF;
+    padding: 20px;
     display: flex;
     flex-direction: row;
-  }
-  
+}
+
 
 .grid {
     grid-template-columns: repeat(2, 1fr);
@@ -130,26 +130,26 @@ footer {
 
 .menu {
     width: 250px;
-  }
-  
-  ul {
+}
+
+ul {
     list-style-type: none;
-  }
-  
-  article {
-    width:525px;
+}
+
+article {
+    width: 525px;
     height: 550px;
-  }
-  
-  h1 {
+}
+
+h1 {
     height: 400px;
     line-height: 150px;
     text-align: center;
     color: black;
-  }
+}
 
 
-  
+
 /* Modal */
 
 
