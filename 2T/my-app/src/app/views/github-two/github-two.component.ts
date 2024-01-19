@@ -12,6 +12,11 @@ import { ModalComponent } from '../../components/modal/modal.component';
 })
 export class GithubTwoComponent {
   public githubAngularUsers: IGithub[] = [];
+  public userSelected: IGithub = {
+    avatarUrl: '',
+    username: ''
+  }
+  public isModalReadyToBeVisible: boolean = false;
 
   public constructor(public service: RequestService) { }
 
@@ -30,6 +35,25 @@ export class GithubTwoComponent {
         )
       });
     })
+  }
+
+  /**
+   * Selects the github user that the user has clicked on displaying a modal window.
+   * @param {IGithub} user
+   * @returns {any}
+   */
+  public selectUser(user: IGithub): void {
+    this.userSelected = user;
+    this.isModalReadyToBeVisible = true;
+  }
+
+  /**
+   * Handles if the modal has to be popped up or closed.
+   * @param {boolean} isModalReadyToPopUp
+   * @returns {void}
+   */
+  public handleModal(isModalReadyToPopUp: boolean): void {
+    this.isModalReadyToBeVisible = isModalReadyToPopUp;
   }
 
   /**

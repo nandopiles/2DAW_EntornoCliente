@@ -1,10 +1,11 @@
 <div class="github">
     <div class="content">
         @for (user of githubAngularUsers; track $index) {
-        <img src={{user.avatarUrl}} alt="Avatar img of the user: {{user.username}}">
+        <img src={{user.avatarUrl}} (click)="selectUser(user)" alt="Avatar img of the user: {{user.username}}">
         <h1>{{user.username}}</h1>
         }
     </div>
 </div>
 
-<app-modal></app-modal>
+<app-modal [userSelected]="userSelected" [isModalReadyToPopUp]="isModalReadyToBeVisible"
+    (isModalClosed)="handleModal($event)"></app-modal>
