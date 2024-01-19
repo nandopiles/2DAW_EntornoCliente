@@ -1,6 +1,8 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { NgClass, NgStyle } from '@angular/common';
 import { Item } from '../../interfaces/response.interface';
+import { Meme } from '../../interfaces/required.interface';
+import { ModalInfo } from '../../interfaces/modalInfo.interface';
 
 @Component({
   selector: 'app-modal',
@@ -10,10 +12,14 @@ import { Item } from '../../interfaces/response.interface';
   styleUrl: './modal.component.css'
 })
 export class ModalComponent {
-  @Input() userSelected: Item = {
-    avatar_url: '',
-    login: ''
+  @Input() itemSelected: ModalInfo = {
+    name: '',
+    url: ''
   }
+  /* @Input() selectedItem: ModalInfo = {
+    name: '',
+    url: ''
+  }; */
   @Input() isModalReadyToPopUp: boolean = false;
   @Output() isModalClosed = new EventEmitter<boolean>();
 

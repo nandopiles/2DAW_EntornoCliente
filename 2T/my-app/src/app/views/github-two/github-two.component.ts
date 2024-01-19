@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { RequestService } from '../../services/request.service';
 import { ModalComponent } from '../../components/modal/modal.component';
 import { Item } from '../../interfaces/response.interface';
+import { ModalInfo } from '../../interfaces/modalInfo.interface';
 
 @Component({
   selector: 'app-github-two',
@@ -12,9 +13,9 @@ import { Item } from '../../interfaces/response.interface';
 })
 export class GithubTwoComponent {
   public githubAngularUsers: Item[] = [];
-  public userSelected: Item = {
-    avatar_url: '',
-    login: ''
+  public userSelected: ModalInfo = {
+    name: '',
+    url: ''
   }
   public isModalReadyToBeVisible: boolean = false;
 
@@ -26,7 +27,10 @@ export class GithubTwoComponent {
    * @returns {any}
    */
   public selectUser(user: Item): void {
-    this.userSelected = user;
+    this.userSelected = {
+      name: user.login,
+      url: user.avatar_url
+    }
     this.isModalReadyToBeVisible = true;
   }
 
