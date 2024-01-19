@@ -1,8 +1,9 @@
 <div class="memigo">
     <section>
         <div class="grid">
-            <app-card></app-card>
+            <app-card [infoCard]="memes[currentIndex]"></app-card>
         </div>
-        <button>Anterior</button><button>Siguiente</button>
+        <button (click)="prevPosition()">Anterior</button>
+        <button (click)="nextPosition()">Siguiente</button>
     </section>
 </div>
