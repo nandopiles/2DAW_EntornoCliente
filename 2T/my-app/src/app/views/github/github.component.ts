@@ -15,19 +15,10 @@ export class GithubComponent {
   public constructor(public service: RequestService) { }
 
   /**
-   * Gets the info of each github user and saves it into an array.
+   * Get all users and saved it into and array.
    * @returns {void}
    */
-  public getGithubUserInfo(): void {
-    this.service.getUsersFromAPI("developer").subscribe((response) => {
-      response.items.forEach(element => {
-        this.githubUsers.push(
-          {
-            avatar_url: element.avatar_url,
-            login: element.login
-          }
-        )
-      });
-    })
+  public getUsers(): void {
+    this.githubUsers = this.service.getGithubUserInfo("developer");
   }
 }

@@ -21,23 +21,6 @@ export class GithubTwoComponent {
   public constructor(public service: RequestService) { }
 
   /**
-   * Gets the info of each github Angular user and saves it into an array.
-   * @returns {void}
-   */
-  public getGithubAngularUserInfo(): void {
-    this.service.getUsersFromAPI("angular").subscribe((response) => {
-      response.items.forEach(element => {
-        this.githubAngularUsers.push(
-          {
-            avatar_url: element.avatar_url,
-            login: element.login
-          }
-        )
-      });
-    })
-  }
-
-  /**
    * Selects the github user that the user has clicked on displaying a modal window.
    * @param {IGithub} user
    * @returns {any}
@@ -61,6 +44,6 @@ export class GithubTwoComponent {
    * @returns {void}
    */
   public ngOnInit(): void {
-    this.getGithubAngularUserInfo()
+    this.githubAngularUsers = this.service.getGithubUserInfo("angular");
   }
 }
