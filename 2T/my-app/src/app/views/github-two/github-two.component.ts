@@ -31,4 +31,12 @@ export class GithubTwoComponent {
       });
     })
   }
+
+  /**
+   * Executes the function automatically.
+   * @returns {void}
+   */
+  public ngOnInit(): void {
+    this.getGithubAngularUserInfo()
+  }
 }

@@ -8,10 +8,10 @@
         </nav>
     </div>
 
-    <article>
+    <div class="content">
         @for (user of githubUsers; track $index) {
         <img src={{user.avatarUrl}} alt="Avatar img of the user: {{user.username}}">
         <h1>{{user.username}}</h1>
         }
-    </article>
+    </div>
 </div>
