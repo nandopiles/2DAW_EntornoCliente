@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { RequestService } from '../../services/request.service';
-import { IGithub } from '../../interfaces/github.interface';
+import { Item } from '../../interfaces/response.interface';
 
 @Component({
   selector: 'app-github',
@@ -10,7 +10,7 @@ import { IGithub } from '../../interfaces/github.interface';
   styleUrl: './github.component.css'
 })
 export class GithubComponent {
-  public githubUsers: IGithub[] = [];
+  public githubUsers: Item[] = [];
 
   public constructor(public service: RequestService) { }
 
@@ -19,12 +19,12 @@ export class GithubComponent {
    * @returns {void}
    */
   public getGithubUserInfo(): void {
-    this.service.getResponse("developer").subscribe((response) => {
+    this.service.getUsersFromAPI("developer").subscribe((response) => {
       response.items.forEach(element => {
         this.githubUsers.push(
           {
-            avatarUrl: element.avatar_url,
-            username: element.login
+            avatar_url: element.avatar_url,
+            login: element.login
           }
         )
       });

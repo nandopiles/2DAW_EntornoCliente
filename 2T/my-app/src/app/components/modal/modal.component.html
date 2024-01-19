@@ -1,6 +1,6 @@
 <div [ngClass]="isModalReadyToPopUp ? 'modal show-modal' : 'modal'">
-    <div class="modal-content" [ngStyle]="{'background-image': 'url('+userSelected.avatarUrl+')'}">
+    <div class="modal-content" [ngStyle]="{'background-image': 'url('+userSelected.avatar_url+')'}">
         <span (click)="closeModal()" class="close-button">x</span>
-        <h1>url({{userSelected.username}})</h1>
+        <h1>url({{userSelected.login}})</h1>
     </div>
 </div>

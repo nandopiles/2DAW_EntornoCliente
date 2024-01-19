@@ -1,8 +1,8 @@
 <div class="github">
     <div class="content">
         @for (user of githubAngularUsers; track $index) {
-        <img src={{user.avatarUrl}} (click)="selectUser(user)" alt="Avatar img of the user: {{user.username}}">
-        <h1>{{user.username}}</h1>
+        <img src={{user.avatar_url}} (click)="selectUser(user)" alt="Avatar img of the user: {{user.login}}">
+        <h1>{{user.login}}</h1>
         }
     </div>
 </div>

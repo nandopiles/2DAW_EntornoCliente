@@ -13,11 +13,11 @@ export class RequestService {
   constructor(public http: HttpClient) { }
 
   /**
-   * Gets the data from de API.
+   * Returns all the user data from de API.
    * @param {string} param
    * @returns {Observable<IResponse>}
    */
-  public getResponse(param: string): Observable<IResponse> {
+  public getUsersFromAPI(param: string): Observable<IResponse> {
     return this.http.get<IResponse>(this.urlAPI + param);
   }
 }

@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
-import { IGithub } from '../../interfaces/github.interface';
 import { RequestService } from '../../services/request.service';
 import { ModalComponent } from '../../components/modal/modal.component';
+import { Item } from '../../interfaces/response.interface';
 
 @Component({
   selector: 'app-github-two',
@@ -11,10 +11,10 @@ import { ModalComponent } from '../../components/modal/modal.component';
   styleUrl: './github-two.component.css'
 })
 export class GithubTwoComponent {
-  public githubAngularUsers: IGithub[] = [];
-  public userSelected: IGithub = {
-    avatarUrl: '',
-    username: ''
+  public githubAngularUsers: Item[] = [];
+  public userSelected: Item = {
+    avatar_url: '',
+    login: ''
   }
   public isModalReadyToBeVisible: boolean = false;
 
@@ -25,12 +25,12 @@ export class GithubTwoComponent {
    * @returns {void}
    */
   public getGithubAngularUserInfo(): void {
-    this.service.getResponse("angular").subscribe((response) => {
+    this.service.getUsersFromAPI("angular").subscribe((response) => {
       response.items.forEach(element => {
         this.githubAngularUsers.push(
           {
-            avatarUrl: element.avatar_url,
-            username: element.login
+            avatar_url: element.avatar_url,
+            login: element.login
           }
         )
       });
@@ -42,7 +42,7 @@ export class GithubTwoComponent {
    * @param {IGithub} user
    * @returns {any}
    */
-  public selectUser(user: IGithub): void {
+  public selectUser(user: Item): void {
     this.userSelected = user;
     this.isModalReadyToBeVisible = true;
   }

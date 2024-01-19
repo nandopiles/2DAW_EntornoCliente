@@ -1,6 +1,6 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
-import { IGithub } from '../../interfaces/github.interface';
 import { NgClass, NgStyle } from '@angular/common';
+import { Item } from '../../interfaces/response.interface';
 
 @Component({
   selector: 'app-modal',
@@ -10,9 +10,9 @@ import { NgClass, NgStyle } from '@angular/common';
   styleUrl: './modal.component.css'
 })
 export class ModalComponent {
-  @Input() userSelected: IGithub = {
-    avatarUrl: '',
-    username: ''
+  @Input() userSelected: Item = {
+    avatar_url: '',
+    login: ''
   }
   @Input() isModalReadyToPopUp: boolean = false;
   @Output() isModalClosed = new EventEmitter<boolean>();
