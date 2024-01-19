@@ -1,13 +1,14 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
-import { IRequired } from '../interfaces/required.interface';
+import { Observable, map } from 'rxjs';
+import { IRequired, Meme } from '../interfaces/required.interface';
 
 @Injectable({
   providedIn: 'root'
 })
 export class RequiredService {
-  public urlAPI: string = 'https://api.imgflip.com/get_memes?q=';
+  private urlAPI: string = 'https://api.imgflip.com/get_memes?q=';
+  private memes: Meme[] = [];
 
   constructor(public http: HttpClient) { }
 
@@ -18,5 +19,17 @@ export class RequiredService {
    */
   public getMemesFromAPI(param: string): Observable<IRequired> {
     return this.http.get<IRequired>(this.urlAPI + param);
+  }
+
+  /**
+     * Gets all the memes into an array.
+     * @returns {Meme[]}
+     */
+  public getMemes(): Meme[] {
+    this.getMemesFromAPI("angular").subscribe((response) => {
+      response.data.memes.forEach((meme) => this.memes.push(meme));
+    })
+
+    return this.memes;
   }
 }

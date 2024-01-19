@@ -17,20 +17,10 @@ export class MemigoComponent {
   public constructor(public service: RequiredService) { }
 
   /**
-     * Gets all the memes into an array.
-     * @returns {void}
-     */
-  public getMemes(): void {
-    this.service.getMemesFromAPI("angular").subscribe((response) => {
-      response.data.memes.forEach((meme) => this.memes.push(meme));
-    })
-  }
-
-  /**
    * Executes the function automatically.
    * @returns {void}
    */
   public ngOnInit(): void {
-    this.getMemes();
+    this.memes = this.service.getMemes();
   }
 }
