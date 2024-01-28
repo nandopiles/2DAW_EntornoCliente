@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { IEpisode } from '../interfaces/IEpisode.interface';
+import { Episode, IEpisode } from '../interfaces/IEpisode.interface';
 import { ICharacter } from '../interfaces/ICharacter.interface';
 
 @Injectable({
@@ -15,15 +15,12 @@ export class RickyService {
   constructor(public http: HttpClient) { }
 
   /**
-   * Gets all the characters from de API
-   * @returns {Observable<ICharacter>}
+   * Gets the info of the episode passed by parameter.
+   * @param {string} specificEpisodeUrl
+   * @returns {Observable<Episode>}
    */
-  /* public getCharactersFromAPI(): Observable<ICharacter> {
-    return this.http.get<ICharacter>(this.characterUrlAPI);
-  } */
-
-  public getEpisode(specificEpisodeUrl: string): Observable<IEpisode> {
-    return this.http.get<IEpisode>(specificEpisodeUrl);
+  public getEpisode(specificEpisodeUrl: string): Observable<Episode> {
+    return this.http.get<Episode>(specificEpisodeUrl);
   }
 
   /**
@@ -32,9 +29,21 @@ export class RickyService {
    * @param {string} value
    * @returns {Observable<ICharacter>}
    */
-  public getCharactersFilteredByFromAPI(filter: string, value: string): Observable<ICharacter> {
+  public getCharactersFilteredBy(filter: string, value: string): Observable<ICharacter> {
     const urlWithFilter = `${this.characterUrlAPI}?${filter}=${value}`;
 
     return this.http.get<ICharacter>(urlWithFilter);
+  }
+
+  /**
+   * Gets all the episodes that finds with the value specified and the filter option.
+   * @param {string} filter
+   * @param {string} value
+   * @returns {Observable<IEpisode>}
+   */
+  public getEpisodeFilteredBy(filter: string, value: string): Observable<IEpisode> {
+    const urlWithFilter = `${this.episodeUrlAPI}?${filter}=${value}`;
+
+    return this.http.get<IEpisode>(urlWithFilter);
   }
 }

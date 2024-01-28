@@ -1,6 +1,6 @@
 export interface ICharacter {
     info: Info;
-    results: Result[];
+    results: Character[];
 }
 
 export interface Info {
@@ -10,19 +10,19 @@ export interface Info {
     prev: null;
 }
 
-export interface Result {
-    id?: number;
-    name?: string;
-    status?: Status;
-    species?: Species;
-    type?: string;
-    gender?: Gender;
-    origin?: Location;
-    location?: Location;
-    image?: string;
-    episode?: string[];
-    url?: string;
-    created?: Date;
+export interface Character {
+    id: number;
+    name: string;
+    status: Status;
+    species: Species;
+    type: string;
+    gender: Gender;
+    origin: Location;
+    location: Location;
+    image: string;
+    episode: string[];
+    url: string;
+    created: Date;
 }
 
 export enum Gender {

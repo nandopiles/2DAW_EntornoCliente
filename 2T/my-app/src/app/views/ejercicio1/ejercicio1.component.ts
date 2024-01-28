@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { ReactiveFormsModule, FormControl, FormGroup } from '@angular/forms';
 import { RickyService } from '../../services/ricky.service';
-import { IEpisode } from '../../interfaces/IEpisode.interface';
+import { IEpisodeResult } from '../../interfaces/IEpisodeResult.interface';
 
 @Component({
   selector: 'app-ejercicio1',
@@ -17,7 +17,8 @@ export class Ejercicio1Component {
   })
   public categorySubmitted: string = '';
   public nameSubmitted: string = '';
-  public infoEpisodes: IEpisode[] = [];
+  public infoEpisodes: IEpisodeResult[] = [];
+  // public charactersInEpisode: Result[] = [];
 
   public constructor(public _rickyService: RickyService) { }
 
@@ -27,28 +28,43 @@ export class Ejercicio1Component {
    * @returns {void}
    */
   public getEpisodeInfo(specificEpisode: string): void {
-    this._rickyService.getEpisode(specificEpisode).subscribe((info) => {
+    this._rickyService.getEpisode(specificEpisode).subscribe((episode) => {
       this.infoEpisodes.push(
         {
-          name: info.name,
-          episode: info.episode
+          name: episode.name,
+          episode: episode.episode
         }
       )
     });
   }
 
   /**
-     * Gets the urls of all the episodes that appears the character specified.
+     * Gets the info of all the episodes that appears the character specified.
      * @returns {void}
    */
-  public getEpisodesOfCharacterUrl(): void {
-    this._rickyService.getCharactersFilteredByFromAPI('name', this.nameSubmitted).subscribe((characters) => {
-      characters.results.map((character) => {
-        character.episode?.map((episode) => {
+  public getEpisodesOfCharacter(): void {
+    this._rickyService.getCharactersFilteredBy('name', this.nameSubmitted).subscribe((characters) => {
+      characters.results.forEach((character) => {
+        character.episode.forEach((episode) => {
           this.getEpisodeInfo(episode);
         })
       })
     });
+  }
+
+  /**
+   * Gets the info of all the characters that appears in the episode chosen.
+   * @returns {void}
+   */
+  public getCharactersOfEpisode(): void {
+    this._rickyService.getEpisodeFilteredBy('name', this.nameSubmitted).subscribe((episode) => {
+
+      // console.log(episode.);
+
+      /* episode.characters?.map((character) => {
+
+      }) */
+    })
   }
 
   /**
@@ -60,9 +76,9 @@ export class Ejercicio1Component {
     this.nameSubmitted = this.reactiveForm.value.name || '';
 
     if (this.categorySubmitted === 'capitulo') {
-      this.getEpisodesOfCharacterUrl();
+      this.getEpisodesOfCharacter();
     } else if (this.categorySubmitted === 'personaje') {
-      // other thing
+      this.getCharactersOfEpisode();
     }
   }
 }
