@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { ReactiveFormsModule, FormControl, FormGroup } from '@angular/forms';
 import { RickyService } from '../../services/ricky.service';
-import { IEpisodeResult } from '../../interfaces/IEpisodeResult.interface';
+import { ICharacterResult, IEpisodeResult } from '../../interfaces/IResults.interface';
 
 @Component({
   selector: 'app-ejercicio1',
@@ -18,7 +18,7 @@ export class Ejercicio1Component {
   public categorySubmitted: string = '';
   public nameSubmitted: string = '';
   public infoEpisodes: IEpisodeResult[] = [];
-  // public charactersInEpisode: Result[] = [];
+  public charactersInEpisode: ICharacterResult[] = [];
 
   public constructor(public _rickyService: RickyService) { }
 
@@ -53,17 +53,31 @@ export class Ejercicio1Component {
   }
 
   /**
+   * Gets all the info of the character passed by parameter.
+   * @param {string} specificCharacter
+   * @returns {void}
+   */
+  public getCharacterInfo(specificCharacter: string): void {
+    this._rickyService.getCharacter(specificCharacter).subscribe((character) => {
+      this.charactersInEpisode.push(
+        {
+          name: character.name
+        }
+      )
+    });
+  }
+
+  /**
    * Gets the info of all the characters that appears in the episode chosen.
    * @returns {void}
    */
   public getCharactersOfEpisode(): void {
     this._rickyService.getEpisodeFilteredBy('name', this.nameSubmitted).subscribe((episode) => {
-
-      // console.log(episode.);
-
-      /* episode.characters?.map((character) => {
-
-      }) */
+      episode.results.forEach((infoEpisode) => {
+        infoEpisode.characters.forEach((character) => {
+          this.getCharacterInfo(character);
+        })
+      })
     })
   }
 

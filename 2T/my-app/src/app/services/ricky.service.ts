@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Episode, IEpisode } from '../interfaces/IEpisode.interface';
-import { ICharacter } from '../interfaces/ICharacter.interface';
+import { Character, ICharacter } from '../interfaces/ICharacter.interface';
 
 @Injectable({
   providedIn: 'root'
@@ -33,6 +33,15 @@ export class RickyService {
     const urlWithFilter = `${this.characterUrlAPI}?${filter}=${value}`;
 
     return this.http.get<ICharacter>(urlWithFilter);
+  }
+
+  /**
+   * Gets the info of the character passed by parameter.
+   * @param {string} specificCharacterUrl
+   * @returns {Observable<Character>}
+   */
+  public getCharacter(specificCharacterUrl: string): Observable<Character> {
+    return this.http.get<Character>(specificCharacterUrl);
   }
 
   /**
