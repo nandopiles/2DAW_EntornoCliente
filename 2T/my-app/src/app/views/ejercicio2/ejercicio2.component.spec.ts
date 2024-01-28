@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { MemigoTwoComponent } from './memigo-two.component';
+import { Ejercicio2Component } from './ejercicio2.component';
 
-describe('MemigoTwoComponent', () => {
-  let component: MemigoTwoComponent;
-  let fixture: ComponentFixture<MemigoTwoComponent>;
+describe('Ejercicio2Component', () => {
+  let component: Ejercicio2Component;
+  let fixture: ComponentFixture<Ejercicio2Component>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [MemigoTwoComponent]
+      imports: [Ejercicio2Component]
     })
     .compileComponents();
     
-    fixture = TestBed.createComponent(MemigoTwoComponent);
+    fixture = TestBed.createComponent(Ejercicio2Component);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

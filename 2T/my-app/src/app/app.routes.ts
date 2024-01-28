@@ -1,15 +1,11 @@
 import { Routes } from '@angular/router';
-import { GithubComponent } from './views/github/github.component';
-import { GithubTwoComponent } from './views/github-two/github-two.component';
-import { MemigoComponent } from './views/memigo/memigo.component';
-import { MemigoTwoComponent } from './views/memigo-two/memigo-two.component';
-import { MemigoThreeComponent } from './views/memigo-three/memigo-three.component';
+import { Ejercicio1Component } from './views/ejercicio1/ejercicio1.component';
+import { Ejercicio2Component } from './views/ejercicio2/ejercicio2.component';
+import { MainComponent } from './views/main/main.component';
 
 export const routes: Routes = [
-    { path: '', redirectTo: 'github', pathMatch: 'full' },
-    { path: 'github', component: GithubComponent },
-    { path: 'githubTwo', component: GithubTwoComponent },
-    { path: 'memigo', component: MemigoComponent },
-    { path: 'memigoTwo', component: MemigoTwoComponent },
-    { path: 'memigoThree', component: MemigoThreeComponent }
+    { path: '', redirectTo: 'main', pathMatch: 'full' },
+    { path: 'main', component: MainComponent },
+    { path: 'ejercicio1', component: Ejercicio1Component },
+    { path: 'ejercicio2', component: Ejercicio2Component }
 ];
