@@ -27,7 +27,7 @@ export class ContentComponent {
   public changeImg(photo?: string): void {
     if (this.isImgSmall) {
       this.isImgSmall = false;
-      this.imgSelected = photo
+      this.imgSelected = photo;
     } else
       this.isImgSmall = true;
   }
