@@ -1,7 +1,17 @@
-<div class="header">
-    <a routerLink="/ejercicio1" routerLinkActive="active" class="question-link">Ejercicio 1</a>
-    <a routerLink="/ejercicio2" routerLinkActive="active" class="question-link">Ejercicio 2</a>
+<div class="navigation">
+    <ul>
+        <a routerLink="/view1" routerLinkActive="active" class="nav-link" [ngClass]="{'logo': isView1Selected}"
+            (click)="selectView(1)">Vista 1</a>
+        <a routerLink="/view2" routerLinkActive="active" class="nav-link" [ngClass]="{'logo': !isView1Selected}"
+            (click)="selectView(2)">Vista 2</a>
+    </ul>
 </div>
-<div class="welcome">
-    <h1>Ejercicios formularios</h1>
+
+<div class="banner">
+    <div class="banner-text">
+        <h2>{{isView1Selected ? 'Vista 1' : 'Vista 2'}}</h2>
+    </div>
+</div>
+
+<div class="content">
 </div>
