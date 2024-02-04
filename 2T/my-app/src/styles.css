@@ -4,7 +4,7 @@ a {
   text-decoration: underline;
   cursor: pointer;
 }
- 
+
 a:hover {
   text-decoration: none;
 }
@@ -21,7 +21,7 @@ a:hover {
   background-color: #2176FF;
   border-radius: 2px;
   color: #ffffff;
-  font-family: 'Raleway',sans-serif;
+  font-family: 'Raleway', sans-serif;
   font-size: 16px;
   font-weight: 400;
   padding: 14px;
@@ -35,7 +35,7 @@ a:hover {
   color: #2176FF;
   transition: color .1s ease-in, background-color .1s ease-in;
 }
- 
+
 .btn:active {
   font-size: 18px;
   transition: font-size .1s ease-in-out;
@@ -52,115 +52,124 @@ a:hover {
   color: #5495ff;
   transition: color .1s ease-in, background-color .1s ease-in;
 }
- 
+
 .activity:active {
   font-size: 40px;
   transition: font-size .1s;
 }
 
-.hotel{
+.hotel {
   border: 1px solid #5495ff;
   margin: 100px auto;
   padding: 10px 0px 0px 0px;
   width: 70%;
 }
-.hotel-img{
+
+.hotel-img {
   display: inline-block;
   margin-top: 20px;
   margin-right: 100px;
 }
-.hotel-img-2{
-display: inline-block;
-width: 450px;
+
+.hotel-img-2 {
+  display: inline-block;
+  width: 450px;
 }
-.hotel-description{
+
+.hotel-description {
   display: inline-block;
   width: 70%;
 }
-.book{
-margin-top: 30px;
-width: 100%;
+
+.book {
+  margin-top: 30px;
+  width: 100%;
 }
-.book a{
-background-color: #5495ff;
-color: #ffffff;
-display: block;
-font-family: 'Pontano Sans',sans-serif;
-font-size: 16px;
-padding: 14px;
-text-align: center;
-text-decoration: none;
-text-transform: uppercase;
+
+.book a {
+  background-color: #5495ff;
+  color: #ffffff;
+  display: block;
+  font-family: 'Pontano Sans', sans-serif;
+  font-size: 16px;
+  padding: 14px;
+  text-align: center;
+  text-decoration: none;
+  text-transform: uppercase;
 }
-ul{
-padding: 0px;
-margin: 10px 0px;
+
+ul {
+  padding: 0px;
+  margin: 10px 0px;
 }
-li{
-margin:0px;
-list-style: none;
+
+li {
+  margin: 0px;
+  list-style: none;
 }
 
 .photo {
-border: 1px solid #5495ff;
-width: 25%;
-padding: 1.11rem;
-border-radius: 5px;
-margin: 0 auto 4.44rem auto;
-background-color: white;
+  border: 1px solid #5495ff;
+  width: 25%;
+  padding: 1.11rem;
+  border-radius: 5px;
+  margin: 0 auto 4.44rem auto;
+  background-color: white;
 }
 
 .photo-2 {
-border: 1px solid #5495ff;
-width: 50%;
-padding: 1.11rem;
-border-radius: 5px;
-margin: 0 auto 4.44rem auto;
-background-color: white;
-display: flex;
-
+  border: 1px solid #5495ff;
+  width: 50%;
+  padding: 1.11rem;
+  border-radius: 5px;
+  margin: 0 auto 4.44rem auto;
+  background-color: white;
+  display: flex;
 }
 
 .photo .image-container {
-margin-bottom: 1.11rem;
+  margin-bottom: 1.11rem;
 }
 
 .photo .image-container img {
-width: 100%;
+  width: 100%;
 }
 
 .photo .image-container2 img {
-width: 48%;
+  width: 48%;
 }
 
 .photo .caption {
-font-style: italic;
-font-family: "Merriweather", serif;
+  font-style: italic;
+  font-family: "Merriweather", serif;
 }
 
-body{
+body {
   background-color: #ffffff;
   margin: 0px;
-  padding:0px;
+  padding: 0px;
 }
-.navigation{
+
+.navigation {
   box-sizing: border-box;
   background-color: #ffffff;
   border-bottom: 1px solid #dddddd;
   left: 0px;
   overflow-y: auto;
-  padding:30px;
+  padding: 30px;
   position: fixed;
   text-align: center;
   top: 0px;
   width: 100%;
   z-index: 999;
 }
-ul{
+
+ul {
   margin: 0px;
   padding: 0px;
 }
-.navigation a{
+
+.navigation a {
   color: #736B92;
   display: inline-block;
   font-family: 'Raleway', sans-serif;
@@ -170,15 +179,17 @@ ul{
   padding: 10px 40px;
   text-transform: uppercase;
 }
-a.logo{
+
+a.logo {
   color: #2176FF;
-  font-family: 'Amatic SC',sans-serif;
+  font-family: 'Amatic SC', sans-serif;
   font-size: 34px;
   padding: 0px 60px;
   text-align: center;
   text-transform: uppercase;
 }
-.banner{
+
+.banner {
   background-image: url("https://static.eldiario.es/clip/0a1ee554-bcf7-4c32-9c2a-37e76297ef6f_16-9-discover-aspect-ratio_default_0.jpg");
   background-position: center top;
   background-size: cover;
@@ -189,13 +200,15 @@ a.logo{
   top: 100px;
   width: 100%;
 }
-.banner-text{
+
+.banner-text {
   position: relative;
   top: 200px;
 }
-h1{
+
+h1 {
   color: #ffffff;
-  font-family: 'Raleway',sans-serif;
+  font-family: 'Raleway', sans-serif;
   font-size: 60px;
   font-weight: 100;
   letter-spacing: 2px;
@@ -203,19 +216,22 @@ h1{
   text-align: center;
   text-transform: uppercase;
 }
-h2{
+
+h2 {
   color: #2176FF;
-  font-family: 'Amatic SC',sans-serif;
+  font-family: 'Amatic SC', sans-serif;
   font-size: 30px;
   margin: 0px;
   text-align: center;
   text-transform: uppercase;
 }
-.banner h2{
+
+.banner h2 {
   font-size: 120px;
   margin: -40px 0px 80px 0px;
 }
-.content{
+
+.content {
   background-position: center top;
   background-size: cover;
   border-bottom: 1px solid #eeeeee;
@@ -225,18 +241,21 @@ h2{
   position: relative;
   text-align: center;
 }
-p{
+
+p {
   color: #000000;
-  font-family: 'Raleway',sans-serif;
+  font-family: 'Raleway', sans-serif;
   font-size: 18px;
   line-height: 42px;
   text-align: left;
 }
-.description{
+
+.description {
   display: inline-block;
   width: 70%;
 }
-.activities-panel{
+
+.activities-panel {
   margin-bottom: 40px;
   padding: 80px 0px;
   text-align: center;
@@ -245,10 +264,12 @@ p{
   flex-wrap: wrap;
   justify-content: center;
 }
+
 .activities-panel h2 {
   width: 100%;
 }
-.activity{
+
+.activity {
   background-color: #2176FF;
   box-sizing: border-box;
   width: 240px;
@@ -257,20 +278,22 @@ p{
   align-items: center;
   justify-content: center;
   color: #fff;
-  font-family: 'Amatic SC',sans-serif;
+  font-family: 'Amatic SC', sans-serif;
   font-size: 30px;
   text-align: center;
   text-transform: uppercase;
   margin: 5px;
 }
-.footer{
+
+.footer {
   background-color: #2176FF;
   padding: 30px;
   text-align: center;
 }
-.footer h2{
+
+.footer h2 {
   color: #ffffff;
-  font-family: 'Raleway',sans-serif;
+  font-family: 'Raleway', sans-serif;
   font-size: 14px;
   font-weight: 100;
   letter-spacing: 2px;

@@ -7,7 +7,7 @@
     </ul>
 </div>
 
-<div class="banner">
+<div class="banner" [ngStyle]="{'background-image': selectBackgroundImg()}">
     <div class="banner-text">
         <h2>{{isView1Selected ? 'Vista 1' : 'Vista 2'}}</h2>
     </div>
