@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { infoPhoto } from '../../interfaces/infoPhoto.interface';
 import { NgClass } from '@angular/common';
 
@@ -12,23 +12,20 @@ import { NgClass } from '@angular/common';
 export class ContentComponent {
   @Input() infoPhoto: infoPhoto =
     {
-      img1: '',
-      img2: '',
-      text: ''
+      images: [],
+      text: '',
+      class: ''
     }
-  public isImgSmall: boolean = true;
-  public imgSelected: string | undefined = "";
+  @Output() data = new EventEmitter<infoPhoto>();
 
   /**
    * Displays the img selected converting in it with a bigger width.
-   * @param {string} photo?
+   * @param {string} photo
    * @returns {void}
    */
-  public changeImg(photo?: string): void {
-    if (this.isImgSmall) {
-      this.isImgSmall = false;
-      this.imgSelected = photo;
-    } else
-      this.isImgSmall = true;
+  public changeImg(photo: string): void {
+    this.infoPhoto.class === 'image-container2'
+      ? this.data.emit({ images: [photo], text: this.infoPhoto.text, class: 'image-container' })
+      : this.data.emit({ images: [photo], text: this.infoPhoto.text, class: 'image-container2' })
   }
 }

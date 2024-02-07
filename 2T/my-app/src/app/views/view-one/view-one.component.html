@@ -1,3 +1,5 @@
-@for (info of infoPhotos; track $index) {
-<app-content [infoPhoto]="info"></app-content>
-}
+<div class="journal">
+    @for(image of infoPhotos; track $index){
+    <app-content (data)="changeSizePhoto($event, $index)" [infoPhoto]="image"></app-content>
+    }
+</div>

@@ -1,16 +1,8 @@
-@if (isImgSmall) {
 <div class="photo">
-    <div class="image-container2">
-        <img src={{infoPhoto.img1}} (click)="changeImg(infoPhoto.img1)">
-        <img src={{infoPhoto.img2}} (click)="changeImg(infoPhoto.img2)">
+    <div [ngClass]="infoPhoto.class">
+        @for(image of infoPhoto.images; track image){
+        <img (click)="changeImg(image)" src={{image}}>
+        }
     </div>
     <span class="caption">{{infoPhoto.text}}</span>
 </div>
-}@else {
-<div class="photo">
-    <div class="image-container">
-        <img src={{imgSelected}} (click)="changeImg()">
-    </div>
-    <span class="caption">{{infoPhoto.text}}</span>
-</div>
-}
