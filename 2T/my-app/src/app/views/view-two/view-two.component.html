@@ -1,1 +1,21 @@
-<!-- <app-content [infoPhoto]="infoPhoto"></app-content> -->
+<div id="page">
+
+    <section>
+        <div class="content">
+            <div class="grid">
+                <!-- CARD -->
+                @for (player of playersInfo; track $index) {
+                <app-card (infoModal)="fillInfoModal($event)" [object]="player"></app-card>
+                }
+            </div>
+
+            <div id='render-more'>
+                <button>ANTERIORES</button>
+                <button>SIGUIENTES</button>
+            </div>
+        </div>
+    </section>
+</div>
+
+<app-modal (isModalClosed)="handleModal($event)" [infoCharacter]="modalInfo"
+    [isModalReadyToPopUp]="isModalReadyToBeVisible"></app-modal>

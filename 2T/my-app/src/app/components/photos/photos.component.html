@@ -1,0 +1,15 @@
+<div class="container-view-three">
+    <div class="photos-view-three">
+        <div>
+            <!-- Small Photos -->
+            @for (food of foodsInfo; track $index) {
+            <img (click)="selectImg(food)" [src]="food.image" style="width: 19%;">
+            }
+
+            <!-- Big Photo -->
+            @if (isReadyToDisplay) {
+            <img (click)="showModal()" [src]="imgSelected.image" style="width: 100%;">
+            }
+        </div>
+    </div>
+</div>

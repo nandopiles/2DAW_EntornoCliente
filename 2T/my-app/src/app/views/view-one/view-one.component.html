@@ -1,5 +1,38 @@
-<div class="journal">
-    @for(image of infoPhotos; track $index){
-    <app-content (data)="changeSizePhoto($event, $index)" [infoPhoto]="image"></app-content>
-    }
+<div id="page">
+
+    <section>
+        <form (ngSubmit)="onSubmit()" [formGroup]="reactiveForm" method="post">
+            <div class="answer-bank">
+                <div class="answer">
+                    <input formControlName="name" type="text" name="name" id="name" value="nombre"
+                        placeholder="nombre" />
+                </div>
+                <div class="answer">
+                    <input type="submit" value="Enviar" class="primary" />
+                </div>
+            </div>
+        </form>
+    </section>
+
+
+    <section>
+        <div class="content">
+            <div class="grid">
+                <!-- CARD -->
+                @if (isSubmitted) {
+                @for (character of charactersList; track $index) {
+                <app-card (infoModal)="fillInfoModal($event)" [object]="character"></app-card>
+                }
+                }
+            </div>
+
+            <div id='render-more'>
+                <button>ANTERIORES</button>
+                <button>SIGUIENTES</button>
+            </div>
+        </div>
+    </section>
 </div>
+
+<app-modal (isModalClosed)="handleModal($event)" [infoCharacter]="modalInfo"
+    [isModalReadyToPopUp]="isModalReadyToBeVisible"></app-modal>

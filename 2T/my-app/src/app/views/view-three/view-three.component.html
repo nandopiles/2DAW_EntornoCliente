@@ -1,0 +1,11 @@
+<div style="margin-top: 30px;">
+    <div class="frutas">
+        <h4 style="margin-right: 40px;" (click)="selectTopic(true)">Verduras</h4>
+        <h4 (click)="selectTopic(false)">Frutas</h4>
+    </div>
+    <!-- PHOTOS -->
+    <app-photos (infoModal)="fillInfoModal($event)" [foodsInfo]="topicSelected"></app-photos>
+</div>
+
+<app-modal (isModalClosed)="handleModal($event)" [infoCharacter]="modalInfo"
+    [isModalReadyToPopUp]="isModalReadyToBeVisible"></app-modal>

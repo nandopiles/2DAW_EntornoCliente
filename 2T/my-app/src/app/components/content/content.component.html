@@ -1,8 +1,0 @@
-<div class="photo">
-    <div [ngClass]="infoPhoto.class">
-        @for(image of infoPhoto.images; track image){
-        <img (click)="changeImg(image)" src={{image}}>
-        }
-    </div>
-    <span class="caption">{{infoPhoto.text}}</span>
-</div>
